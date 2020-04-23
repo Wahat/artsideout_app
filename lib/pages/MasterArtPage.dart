@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ArtInstallationPage.dart';
-import 'ArtDetailPage.dart';
+import 'ArtDetailWidget.dart';
 import 'DetailPage.dart';
 
 class MasterDetailPage extends StatefulWidget {
@@ -38,7 +38,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
               }
             }),
           ),
-          isLargeScreen ? Expanded(child: DetailWidget(selectedValue)) : Container(),
+          isLargeScreen ? Expanded(child: ArtDetailWidget(selectedValue)) : Container(),
         ]);
       }),
     );

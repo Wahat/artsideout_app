@@ -1,20 +1,20 @@
 
 import 'package:flutter/material.dart';
-class DetailWidget extends StatefulWidget {
+class ArtDetailWidget extends StatefulWidget {
 
   final int data;
 
-  DetailWidget(this.data);
+  ArtDetailWidget(this.data);
 
   @override
-  _DetailWidgetState createState() => _DetailWidgetState();
+  _ArtDetailWidgetState createState() => _ArtDetailWidgetState();
 }
 
-class _DetailWidgetState extends State<DetailWidget> {
+class _ArtDetailWidgetState extends State<ArtDetailWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: Theme.of(context).primaryColor,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

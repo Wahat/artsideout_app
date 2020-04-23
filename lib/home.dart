@@ -3,6 +3,23 @@ import 'package:flutter/services.dart';
 import 'pages/MasterArtPage.dart';
 import 'placeholder.dart';
 
+class NavigationItem {
+  Icon icon;
+  Text title;
+  Widget page;
+
+  NavigationItem(this.icon, this.title, this.page);
+}
+
+final List<NavigationItem> _barItems = [
+  NavigationItem(
+    Icon(Icons.home), Text("Home"), MasterDetailPage()),
+  NavigationItem(
+      Icon(Icons.map), Text("Map"), PlaceholderWidget(Colors.deepOrange)),
+  NavigationItem(
+      Icon(Icons.search), Text("Search"), PlaceholderWidget(Colors.green))
+];
+
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -10,21 +27,9 @@ class Home extends StatefulWidget {
   }
 }
 
-// if (MediaQuery.of(context).size.width > 600) {
-//           isLargeScreen = true;
-//         } else {
-//           isLargeScreen = false;
-//         }
-// return isLargeScreen? _buildTabletLayout() : _buildMobileLayout();
-
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
 
-  final List<Widget> _children = [
-    MasterDetailPage(),
-    PlaceholderWidget(Colors.deepOrange),
-    PlaceholderWidget(Colors.green)
-  ];
   @override
   Widget build(BuildContext context) {
     Widget _buildTabletLayout() {
@@ -33,24 +38,17 @@ class _HomeState extends State<Home> {
       return Scaffold(
         appBar: AppBar(
           title: Text('ARTSIDEOUT Demo - Tablet'),
-        ),
-        body: _children[_currentIndex], // new
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabTapped, // new
-          currentIndex: _currentIndex, // new
-          items: [
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
-            ),
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.map),
-              title: Text('Map'),
-            ),
-            new BottomNavigationBarItem(
-                icon: Icon(Icons.search), title: Text('Search'))
+          actions: <Widget>[
+            for (var i = 0; i < _barItems.length; i++)
+              IconButton(
+                icon: _barItems[i].icon,
+                onPressed: () {
+                  onTabTapped(i);
+                },
+              ),
           ],
         ),
+        body: _barItems[_currentIndex].page
       );
     }
 
@@ -61,21 +59,16 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: Text('ARTSIDEOUT Demo - Mobile'),
         ),
-        body: _children[_currentIndex], // new
+        body: _barItems[_currentIndex].page, // new
         bottomNavigationBar: BottomNavigationBar(
           onTap: onTabTapped, // new
           currentIndex: _currentIndex, // new
           items: [
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
-            ),
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.map),
-              title: Text('Map'),
-            ),
-            new BottomNavigationBarItem(
-                icon: Icon(Icons.search), title: Text('Search'))
+            for (var i = 0; i < _barItems.length; i++)
+            BottomNavigationBarItem(
+              icon: _barItems[i].icon,
+              title: _barItems[i].title,
+            )
           ],
         ),
       );
