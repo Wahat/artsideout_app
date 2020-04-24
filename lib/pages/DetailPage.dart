@@ -3,7 +3,7 @@ import 'ArtDetailWidget.dart';
 
 class DetailPage extends StatefulWidget {
 
-  final int data;
+  final String data;
 
   DetailPage(this.data);
 

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 class ArtDetailWidget extends StatefulWidget {
 
-  final int data;
+  final String data;
 
   ArtDetailWidget(this.data);
 
@@ -19,7 +19,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(widget.data.toString(), style: TextStyle(fontSize: 36.0, color: Colors.white),),
+            Text(widget.data, style: TextStyle(fontSize: 36.0, color: Colors.white),),
           ],
         ),
       ),

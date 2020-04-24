@@ -13,13 +13,21 @@ class MasterDetailPage extends StatefulWidget {
 }
 
 class _MasterDetailPageState extends State<MasterDetailPage> {
-  var selectedValue = 0;
+  int selectedValue = 0;
   var isLargeScreen = false;
 
   List<Installation> listInstallation = List<Installation>();
   GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
-  void fillList() async {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _fillList();
+    });
+  }
+
+    _fillList() async {
     InstallationQueries queryInstallation = InstallationQueries();
     GraphQLClient _client = graphQLConfiguration.clientToQuery();
     QueryResult result = await _client.query(
@@ -44,12 +52,6 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    fillList();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: OrientationBuilder(builder: (context, orientation) {
@@ -58,7 +60,6 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
         } else {
           isLargeScreen = false;
         }
-
         return Row(children: <Widget>[
           Expanded(
             child: ListView.builder(
@@ -91,7 +92,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
                                 } else {
                                   Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
-                                      return DetailPage(index);
+                                      return DetailPage(item.title);
                                     },
                                   ));
                                 }
@@ -106,8 +107,8 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
               },
             ),
           ),
-          isLargeScreen
-              ? Expanded(child: ArtDetailWidget(selectedValue))
+          (isLargeScreen && listInstallation.length != 0)
+              ? Expanded(child: ArtDetailWidget(listInstallation[selectedValue].title))
               : Container(),
         ]);
       }),
