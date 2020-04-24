@@ -75,6 +75,10 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        Image.network(
+                          item.pictureUrl,
+                          fit: BoxFit.fill,
+                        ),
                         ListTile(
                           leading: Text(item.zone),
                           title: Text(item.title),
