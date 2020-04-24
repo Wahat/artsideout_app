@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'theme.dart';
 import 'home.dart';
+import "graphql/conf.dart";
 
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'package:http/http.dart' as http;
-
-
-Future<void> fetchAlbum() async {
-  final response = await http.get(
-    'https://cdn.contentful.com/spaces/lxvjppx3rl7e/environments/master/content_types?',
-    headers: {'access_token': "Eo9ZoWWJOxZYRXnjvgkRAwzrlwG9fNXIo6po6cTaE3I"},
-  );
-  final responseJson = json.decode(response.body);
-  print(responseJson);
-}
-
+GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  fetchAlbum();
-  runApp(App());
+  runApp(
+    GraphQLProvider(
+      client: graphQLConfiguration.client,
+      child: CacheProvider(child: App()),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
