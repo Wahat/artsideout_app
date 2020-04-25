@@ -2,13 +2,12 @@ class Installation {
   String title;
   String artist;
   String zone;
-  String pictureUrl;
+  String imgUrl;
 
-  Installation(this.title, this.artist, this.zone, this.pictureUrl);
+  Installation(this.title, this.artist, this.zone, this.imgUrl);
 }
 
 class InstallationQueries {
-
   String getAll = """ 
     {
       installations {

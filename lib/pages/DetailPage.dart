@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ArtDetailWidget.dart';
+import 'package:artsideout_app/pages/DetailWidget.dart';
 
 class DetailPage extends StatefulWidget {
 
@@ -16,7 +16,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ArtDetailWidget(widget.data),
+      body: DetailWidget(widget.data),
     );
   }
 }
