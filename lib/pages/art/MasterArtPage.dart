@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:artsideout_app/graphql/config.dart';
 import 'package:artsideout_app/graphql/Installation.dart';
-
+import 'package:artsideout_app/components/Header2.dart';
 import 'package:artsideout_app/pages/DetailWidget.dart';
 import 'package:artsideout_app/pages/DetailPage.dart';
 import 'package:artsideout_app/components/card.dart';
@@ -66,46 +66,54 @@ class _MasterArtPageState extends State<MasterArtPage> {
         }
         return Row(children: <Widget>[
           Expanded(
-            flex: secondFlexSize,
-            child: ListView.builder(
-              // Let the ListView know how many items it needs to build.
-              itemCount: listInstallation.length,
-              // Provide a builder function. This is where the magic happens.
-              // Convert each item into a widget based on the type of item it is.
-              itemBuilder: (context, index) {
-                final item = listInstallation[index];
-                return Center(
-                  child: ArtListCard(
-                      title: item.title,
-                      image: item.imgUrl,
-                      pageButton: Row(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              if (isLargeScreen) {
-                                selectedValue = index;
-                                setState(() {});
-                              } else {
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) {
-                                    return DetailPage(item.title);
-                                  },
-                                ));
-                              }
-                            },
-                            child: Container(
-                              width: 101,
-                              padding: EdgeInsets.symmetric(vertical: 10),
-                              alignment: Alignment.center,
-                              child: Text("View"),
-                            ),
-                          ),
-                        ],
-                      )),
-                );
-              },
-            ),
-          ),
+              flex: secondFlexSize,
+              child: Column(children: <Widget>[
+                Header(
+                  image: "assets/icons/asoBg.svg",
+                  textTop: "ARTSIDEOUT",
+                  textBottom: "2020",
+                  subtitle: "Event Guide",
+                  offset: 0,
+                ),
+               Expanded(child: ListView.builder(
+                  // Let the ListView know how many items it needs to build.
+                  itemCount: listInstallation.length,
+                  // Provide a builder function. This is where the magic happens.
+                  // Convert each item into a widget based on the type of item it is.
+                  itemBuilder: (context, index) {
+                    final item = listInstallation[index];
+                    return Center(
+                      child: ArtListCard(
+                          title: item.title,
+                          image: item.imgUrl,
+                          pageButton: Row(
+                            children: <Widget>[
+                              GestureDetector(
+                                onTap: () {
+                                  if (isLargeScreen) {
+                                    selectedValue = index;
+                                    setState(() {});
+                                  } else {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return DetailPage(item.title);
+                                      },
+                                    ));
+                                  }
+                                },
+                                child: Container(
+                                  width: 101,
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  alignment: Alignment.center,
+                                  child: Text("View"),
+                                ),
+                              ),
+                            ],
+                          )),
+                    );
+                  },
+                )),
+              ])),
           (isLargeScreen && listInstallation.length != 0)
               ? Expanded(
                   child: DetailWidget(listInstallation[selectedValue].title))
@@ -115,55 +123,3 @@ class _MasterArtPageState extends State<MasterArtPage> {
     );
   }
 }
-
-// abstract class ListItem {
-//   /// The title line to show in a list item.
-//   Widget buildTitle(BuildContext context);
-
-//   /// The subtitle line, if any, to show in a list item.
-//   Widget buildSubtitle(BuildContext context);
-// }
-
-// /// A ListItem that contains data to display a heading.
-// class HeadingItem implements ListItem {
-//   final String heading;
-
-//   HeadingItem(this.heading);
-
-//   Widget buildTitle(BuildContext context) {
-//     return Text(
-//       heading,
-//       style: Theme.of(context).textTheme.headline,
-//     );
-//   }
-
-//   Widget buildSubtitle(BuildContext context) => null;
-// }
-
-// /// A ListItem that contains data to display a message.
-// class MessageItem implements ListItem {
-//   final String sender;
-//   final String body;
-
-//   MessageItem(this.sender, this.body);
-
-//   Widget buildTitle(BuildContext context) => Text(sender);
-
-//   Widget buildSubtitle(BuildContext context) => Text(body);
-// }
-
-// Row(
-//   children: <Widget>[
-//     GestureDetector(
-//       onTap: () {
-
-//       },
-//       child: Container(
-//         width: 101,
-//         padding: EdgeInsets.symmetric(vertical: 10),
-//         alignment: Alignment.center,
-//         child: Text("Details"),
-//       ),
-//     ),
-//   ],
-// )

@@ -28,7 +28,6 @@ class _LayoutState extends State<Layout> {
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
       return Scaffold(
           appBar: AppBar(
-            title: Text('ARTSIDEOUT Demo - Tablet'),
             actions: <Widget>[
               for (var i = 0; i < _barItems.length; i++)
                 IconButton(
