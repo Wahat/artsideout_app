@@ -4,7 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:artsideout_app/graphql/config.dart';
 import 'package:artsideout_app/graphql/Installation.dart';
 // Common
-import 'package:artsideout_app/components/pageHeader.dart';
+import 'package:artsideout_app/components/PageHeader.dart';
 import 'package:artsideout_app/components/card.dart';
 // Art
 import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
@@ -62,11 +62,11 @@ class _MasterArtPageState extends State<MasterArtPage> {
         if (MediaQuery.of(context).size.width > 1200) {
           secondFlexSize = 3;
           isLargeScreen = true;
-        // Tablet Size
+          // Tablet Size
         } else if (MediaQuery.of(context).size.width > 600) {
           secondFlexSize = 1;
           isLargeScreen = true;
-        // Phone Size
+          // Phone Size
         } else {
           isLargeScreen = false;
         }
@@ -75,13 +75,13 @@ class _MasterArtPageState extends State<MasterArtPage> {
               flex: secondFlexSize,
               child: Column(children: <Widget>[
                 Header(
-                  image: "assets/icons/asoBg.svg",
-                  textTop: "ARTSIDEOUT",
-                  textBottom: "2020",
-                  subtitle: "Event Guide",
-                  offset: 0,
+                  image: "assets/icons/installation.svg",
+                  textTop: "ART ",
+                  textBottom: "INSTALLATIONS",
+                  subtitle: "Cool Beans",
                 ),
-               Expanded(child: ListView.builder(
+                Expanded(
+                    child: ListView.builder(
                   // Let the ListView know how many items it needs to build.
                   itemCount: listInstallation.length,
                   // Provide a builder function. This is where the magic happens.

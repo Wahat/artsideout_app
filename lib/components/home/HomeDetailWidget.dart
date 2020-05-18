@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
-class HomeDetailWidget extends StatefulWidget {
 
+class HomeDetailWidget extends StatefulWidget {
   final String data;
 
   HomeDetailWidget(this.data);
@@ -19,7 +18,11 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(widget.data, style: TextStyle(fontSize: 36.0, color: Theme.of(context).primaryColor),),
+            Text(
+              widget.data,
+              style: TextStyle(
+                  fontSize: 36.0, color: Theme.of(context).primaryColor),
+            ),
           ],
         ),
       ),

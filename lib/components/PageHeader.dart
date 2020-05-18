@@ -6,14 +6,8 @@ class Header extends StatefulWidget {
   final String textTop;
   final String textBottom;
   final String subtitle;
-  final double offset;
   const Header(
-      {Key key,
-      this.image,
-      this.textTop,
-      this.textBottom,
-      this.subtitle,
-      this.offset})
+      {Key key, this.image, this.textTop, this.textBottom, this.subtitle})
       : super(key: key);
 
   @override
@@ -23,10 +17,17 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+        padding: EdgeInsets.only(left: 40, top: 60, right: 20),
+        height: 300,
+        decoration: BoxDecoration(
+          color: Color(0xFFFCEAEB)
+        ),
+        child: Stack(
           children: <Widget>[
             Positioned(
-              top: (widget.offset < 0) ? 0 : widget.offset,
+              top: 0.0,
+              right: 0.0,
               child: PlatformSvg.asset(
                 widget.image,
                 width: 300,
@@ -35,21 +36,20 @@ class _HeaderState extends State<Header> {
               ),
             ),
             Positioned(
-              top: 20 - widget.offset / 2,
+              top: 20.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("${widget.textTop} \n${widget.textBottom}",
                       style: Theme.of(context).textTheme.headline4.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
+                          fontWeight: FontWeight.bold)),
                   Text(widget.subtitle,
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.white))
+                          fontWeight: FontWeight.bold))
                 ],
               ),
             ),
           ],
-
-              );
+        ));
   }
 }

@@ -23,3 +23,9 @@ $ git clone https://github.com/csecutsc/artsideout_app.git
 $ flutter pub get # update your package list
 $ flutter run -d chrome # test if web is enabled
 ```
+## Contributing 
+Make a feature branch and submitting a pull request
+```
+$ git branch feature-<mynewfeaturename>
+# Then submit a pull request
+```

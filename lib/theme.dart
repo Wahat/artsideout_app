@@ -3,14 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData appTheme = buildTheme();
 
-final Color asoPrimary = Color(0xfff30075);
-final Color asoSecondary = Color(0xfff30075);
+final Color asoPrimary = Color(0xFFF30075);
+final Color asoSecondary = Color(0xFFF30075);
 
 ThemeData buildTheme() {
   final ThemeData base = ThemeData.light();
 
   return base.copyWith(
-    textTheme: GoogleFonts.latoTextTheme(_buildDefaultTextTheme(base.textTheme)),
+    textTheme:
+        GoogleFonts.latoTextTheme(_buildDefaultTextTheme(base.textTheme)),
     primaryTextTheme: _buildDefaultTextTheme(base.primaryTextTheme),
     accentTextTheme: _buildDefaultTextTheme(base.accentTextTheme),
     visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -20,6 +21,10 @@ ThemeData buildTheme() {
 
 TextTheme _buildDefaultTextTheme(TextTheme base) {
   return base.copyWith(
+    headline4: base.headline4.copyWith(
+      fontWeight: FontWeight.w800,
+      color: Color(0xFF404040)
+    ),
     headline5: base.headline5.copyWith(
       fontWeight: FontWeight.w500,
     ),

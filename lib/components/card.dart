@@ -39,7 +39,7 @@ class ArtListCard extends StatelessWidget {
               ),
             ),
           ),
-          Image.network(image, height:200,width: 150),
+          Image.network(image, height: 200, width: 150),
           Positioned(
             top: 35,
             right: 10,

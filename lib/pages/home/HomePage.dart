@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   final List<HomeAction> listHomeActions = [
     HomeAction("News", Colors.purple[200], "assets/icons/activities.svg", 300,
         MasterArtPage()),
-    HomeAction("Art", Colors.blue[200], "assets/icons/saved.svg", 200,
+    HomeAction("Art", Colors.blue[200], "assets/icons/installation.svg", 200,
         MasterArtPage()),
     HomeAction("Activities", Colors.yellow[200], "assets/icons/activities.svg",
         300, MasterArtPage()),
