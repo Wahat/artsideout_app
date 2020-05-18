@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:artsideout_app/HomePage.dart';
-import 'package:artsideout_app/placeholder.dart';
+// Pages
+import 'package:artsideout_app/pages/home/HomePage.dart';
+import 'package:artsideout_app/components/placeholder.dart';
 
 class Layout extends StatefulWidget {
   @override

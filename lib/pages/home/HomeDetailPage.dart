@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/pages/DetailWidget.dart';
+import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
 
-class DetailPage extends StatefulWidget {
+class HomeDetailPage extends StatefulWidget {
 
   final String data;
 
-  DetailPage(this.data);
+  HomeDetailPage(this.data);
 
   @override
   _DetailPageState createState() => _DetailPageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _DetailPageState extends State<HomeDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: DetailWidget(widget.data),
+      body: HomeDetailWidget(widget.data),
     );
   }
 }

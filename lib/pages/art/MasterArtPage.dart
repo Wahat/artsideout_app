@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-
+// GraphQL
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:artsideout_app/graphql/config.dart';
 import 'package:artsideout_app/graphql/Installation.dart';
-import 'package:artsideout_app/components/Header2.dart';
-import 'package:artsideout_app/pages/DetailWidget.dart';
-import 'package:artsideout_app/pages/DetailPage.dart';
+// Common
+import 'package:artsideout_app/components/pageHeader.dart';
 import 'package:artsideout_app/components/card.dart';
+// Art
+import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
+import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 
 class MasterArtPage extends StatefulWidget {
   @override
@@ -27,6 +29,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
     _fillList();
   }
 
+  // Installation GraphQL Query
   void _fillList() async {
     InstallationQueries queryInstallation = InstallationQueries();
     GraphQLClient _client = graphQLConfiguration.clientToQuery();
@@ -55,12 +58,15 @@ class _MasterArtPageState extends State<MasterArtPage> {
     return Scaffold(
       appBar: AppBar(),
       body: OrientationBuilder(builder: (context, orientation) {
+        // Desktop Size
         if (MediaQuery.of(context).size.width > 1200) {
           secondFlexSize = 3;
           isLargeScreen = true;
+        // Tablet Size
         } else if (MediaQuery.of(context).size.width > 600) {
           secondFlexSize = 1;
           isLargeScreen = true;
+        // Phone Size
         } else {
           isLargeScreen = false;
         }
@@ -96,7 +102,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
                                   } else {
                                     Navigator.push(context, MaterialPageRoute(
                                       builder: (context) {
-                                        return DetailPage(item.title);
+                                        return ArtDetailPage(item.title);
                                       },
                                     ));
                                   }
@@ -114,9 +120,10 @@ class _MasterArtPageState extends State<MasterArtPage> {
                   },
                 )),
               ])),
+          // If large screen, render installation detail page
           (isLargeScreen && listInstallation.length != 0)
               ? Expanded(
-                  child: DetailWidget(listInstallation[selectedValue].title))
+                  child: ArtDetailWidget(listInstallation[selectedValue].title))
               : Container(),
         ]);
       }),

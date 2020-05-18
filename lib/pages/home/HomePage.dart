@@ -1,13 +1,16 @@
-import 'package:artsideout_app/pages/DetailPage.dart';
-import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+// GraphQL
 import 'package:artsideout_app/graphql/config.dart';
 import 'package:artsideout_app/graphql/Installation.dart';
-
-import 'package:artsideout_app/pages/DetailWidget.dart';
-import 'package:artsideout_app/components/Header.dart';
 import 'package:artsideout_app/components/common.dart';
+// Home
+import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
+import 'package:artsideout_app/components/home/HomeHeader.dart';
+import 'package:artsideout_app/pages/home/HomeDetailPage.dart';
+// Pages
+import 'package:artsideout_app/pages/art/MasterArtPage.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         return Row(children: <Widget>[
           (isLargeScreen)
               ? Expanded(
-                  flex: secondFlexSize, child: DetailWidget("Temp Event Guide Page"))
+                  flex: secondFlexSize, child: HomeDetailWidget("Temp Event Guide Page"))
               : Container(),
           Expanded(
               flex: 1,
@@ -66,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                       if (!isLargeScreen) {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return DetailPage("Temp Event Page");
+                          return HomeDetailPage("Temp Event Page");
                         },
                       ));
                       }

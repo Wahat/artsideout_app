@@ -1,16 +1,16 @@
 
 import 'package:flutter/material.dart';
-class DetailWidget extends StatefulWidget {
+class HomeDetailWidget extends StatefulWidget {
 
   final String data;
 
-  DetailWidget(this.data);
+  HomeDetailWidget(this.data);
 
   @override
-  _DetailWidgetState createState() => _DetailWidgetState();
+  _HomeDetailWidgetState createState() => _HomeDetailWidgetState();
 }
 
-class _DetailWidgetState extends State<DetailWidget> {
+class _HomeDetailWidgetState extends State<HomeDetailWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
