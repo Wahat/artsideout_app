@@ -10,6 +10,7 @@ import 'package:artsideout_app/components/home/HomeHeader.dart';
 import 'package:artsideout_app/pages/home/HomeDetailPage.dart';
 // Pages
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
+import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     HomeAction("Art", Colors.blue[200], "assets/icons/installation.svg", 200,
         MasterArtPage()),
     HomeAction("Activities", Colors.yellow[200], "assets/icons/activities.svg",
-        300, MasterArtPage()),
+        300, MasterActivityPage()),
     HomeAction("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
         MasterArtPage())
   ];
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
         return Row(children: <Widget>[
           (isLargeScreen)
               ? Expanded(
-                  flex: secondFlexSize, child: HomeDetailWidget("Temp Event Guide Page"))
+                  flex: secondFlexSize, child: HomeDetailWidget())
               : Container(),
           Expanded(
               flex: 1,
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                       if (!isLargeScreen) {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return HomeDetailPage("Temp Event Page");
+                          return HomeDetailPage();
                         },
                       ));
                       }

@@ -1,5 +1,7 @@
 # ARTSIDEOUT App 
 ![Flutter Build](https://github.com/csecutsc/artsideout_app/workflows/Flutter%20Build/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/49b23581-38a9-4b76-bb93-66740da6bf16/deploy-status)](https://app.netlify.com/sites/pedantic-shannon-28fa33/deploys)
+  
 A Flutter application for UTSC's ARTSIDEOUT event. This application runs on Android, iOS and the web.
 
 ## Getting Started
@@ -27,5 +29,6 @@ $ flutter run -d chrome # test if web is enabled
 Make a feature branch and submitting a pull request
 ```
 $ git branch feature-<mynewfeaturename>
+# Add, commit and push
 # Then submit a pull request
 ```

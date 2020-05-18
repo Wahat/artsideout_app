@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:artsideout_app/graphql/Installation.dart';
 
 class ArtDetailWidget extends StatefulWidget {
-  final String data;
+  final Installation data;
 
   ArtDetailWidget(this.data);
 
@@ -19,7 +20,12 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              widget.data,
+              widget.data.title,
+              style: TextStyle(
+                  fontSize: 36.0, color: Theme.of(context).primaryColor),
+            ),
+            Text(
+              widget.data.artist,
               style: TextStyle(
                   fontSize: 36.0, color: Theme.of(context).primaryColor),
             ),
