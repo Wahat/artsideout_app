@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomeDetailWidget extends StatefulWidget {
-  final String data;
 
-  HomeDetailWidget(this.data);
+
+  HomeDetailWidget();
 
   @override
   _HomeDetailWidgetState createState() => _HomeDetailWidgetState();
@@ -19,7 +19,7 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              widget.data,
+              "Temp Event Guide Page",
               style: TextStyle(
                   fontSize: 36.0, color: Theme.of(context).primaryColor),
             ),

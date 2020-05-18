@@ -102,7 +102,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
                                   } else {
                                     Navigator.push(context, MaterialPageRoute(
                                       builder: (context) {
-                                        return ArtDetailPage(item.title);
+                                        return ArtDetailPage(item);
                                       },
                                     ));
                                   }
@@ -123,7 +123,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
           // If large screen, render installation detail page
           (isLargeScreen && listInstallation.length != 0)
               ? Expanded(
-                  child: ArtDetailWidget(listInstallation[selectedValue].title))
+                  child: ArtDetailWidget(listInstallation[selectedValue]))
               : Container(),
         ]);
       }),

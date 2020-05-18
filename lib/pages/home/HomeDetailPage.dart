@@ -3,9 +3,7 @@ import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
 
 class HomeDetailPage extends StatefulWidget {
 
-  final String data;
-
-  HomeDetailPage(this.data);
+  HomeDetailPage();
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -16,7 +14,7 @@ class _DetailPageState extends State<HomeDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: HomeDetailWidget(widget.data),
+      body: HomeDetailWidget(),
     );
   }
 }
