@@ -22,13 +22,14 @@ Setup repo and test Flutter on the web config
 ```
 # cd to where you want the application
 $ git clone https://github.com/csecutsc/artsideout_app.git
-$ flutter pub get # update your package list
+$ flutter pub get && flutter pub upgrade # update your package list
 $ flutter run -d chrome # test if web is enabled
 ```
 ## Contributing 
 Make a feature branch and submitting a pull request
 ```
 $ git branch feature-<mynewfeaturename>
-# Add, commit and push
+# Add, commit
+$ git push origin feature-<mynewfeaturename>
 # Then submit a pull request
 ```

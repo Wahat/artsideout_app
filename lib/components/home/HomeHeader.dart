@@ -26,8 +26,8 @@ class _HeaderState extends State<Header> {
     return ClipPath(
       clipper: MyClipper(),
       child: Container(
-        padding: EdgeInsets.only(left: 40, top: 60, right: 20),
-        height: 350,
+        padding: EdgeInsets.only(left: 20, top: 60, right: 20),
+        height: 20,
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(

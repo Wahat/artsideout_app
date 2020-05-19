@@ -28,7 +28,10 @@ class _LayoutState extends State<Layout> {
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
       return Scaffold(
+        extendBodyBehindAppBar: true,
           appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
             actions: <Widget>[
               for (var i = 0; i < _barItems.length; i++)
                 IconButton(

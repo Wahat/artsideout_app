@@ -18,7 +18,7 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 40, top: 60, right: 20),
+        padding: EdgeInsets.only(left: 20, top: 60, right: 20),
         height: 300,
         decoration: BoxDecoration(
           color: Color(0xFFFCEAEB)
@@ -36,7 +36,7 @@ class _HeaderState extends State<Header> {
               ),
             ),
             Positioned(
-              top: 20.0,
+              top: 10.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
