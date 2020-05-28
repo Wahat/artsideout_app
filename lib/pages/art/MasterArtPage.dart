@@ -47,9 +47,15 @@ class _MasterArtPageState extends State<MasterArtPage> {
           listInstallation.add(
             Installation(
                 result.data["installations"][i]["title"],
-                result.data["installations"][i]["artist"],
+                result.data["installations"][i]["desc"],
                 result.data["installations"][i]["zone"],
-                result.data["installations"][i]["picture"]["url"]),
+                result.data["installations"][i]["image"]["url"],
+                {'latitude': result.data["installations"][i]["location"]["latitude"],
+                'longitude': result.data["installations"][i]["location"]["longitude"],
+                },
+                result.data["installations"][i]["locationroom"],
+                []
+            ),
           );
         });
       }
@@ -117,7 +123,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
                             return Center(
                               child: ArtListCard(
                                   title: item.title,
-                                  artist: item.artist,
+                                  artist: item.zone,
                                   image: item.imgUrl,
                                   pageButton: Row(
                                     children: <Widget>[

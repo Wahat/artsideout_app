@@ -1,3 +1,4 @@
+import 'package:artsideout_app/graphql/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // GraphQL
@@ -44,12 +45,26 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
     if (!result.hasException) {
       for (var i = 0; i < result.data["installations"].length; i++) {
         setState(() {
+          // Profile profile = Profile(
+          //   result.data["installations"][i]["profile"]["name"],
+          //   result.data["installations"][i]["profile"]["desc"],
+          //   result.data["installations"][i]["profile"]["social"],
+          //   result.data["installations"][i]["profile"]["type"],
+          //   [],
+          //   []
+          // );
           listInstallation.add(
             Installation(
                 result.data["installations"][i]["title"],
-                result.data["installations"][i]["artist"],
+                result.data["installations"][i]["desc"],
                 result.data["installations"][i]["zone"],
-                result.data["installations"][i]["picture"]["url"]),
+                result.data["installations"][i]["image"]["url"],
+                {'latitude': result.data["installations"][i]["location"]["latitude"],
+                'longitude': result.data["installations"][i]["location"]["longitude"],
+                },
+                result.data["installations"][i]["locationroom"],
+                []
+            ),
           );
         });
       }
@@ -117,7 +132,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                             return Center(
                               child: ArtListCard(
                                   title: item.title,
-                                  artist: item.artist,
+                                  artist: (item.profiles.length > 0) ? item.profiles[0].name : "",
                                   image: item.imgUrl,
                                   pageButton: Row(
                                     children: <Widget>[

@@ -25,7 +25,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
                   fontSize: 36.0, color: Theme.of(context).primaryColor),
             ),
             Text(
-              widget.data.artist,
+              widget.data.zone,
               style: TextStyle(
                   fontSize: 36.0, color: Theme.of(context).primaryColor),
             ),
