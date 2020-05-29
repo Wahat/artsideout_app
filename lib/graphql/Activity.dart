@@ -10,8 +10,8 @@ class Activity {
   Map<String, double> location;
   List<Profile> profiles;
 
-  Activity(this.title, this.desc, this.overview, [this.imgUrl, this.time,
-      this.location, this.profiles]);
+  Activity(this.title, this.desc, this.overview, {this.imgUrl, this.time,
+      this.location, this.profiles});
 }
 
 class ActivityQueries {

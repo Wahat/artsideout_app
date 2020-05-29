@@ -48,13 +48,13 @@ class _MasterArtPageState extends State<MasterArtPage> {
             Installation(
                 result.data["installations"][i]["title"],
                 result.data["installations"][i]["desc"],
-                result.data["installations"][i]["zone"],
-                result.data["installations"][i]["image"]["url"],
-                {'latitude': result.data["installations"][i]["location"]["latitude"],
+                zone: result.data["installations"][i]["zone"],
+                imgUrl: result.data["installations"][i]["image"]["url"],
+                location: {'latitude': result.data["installations"][i]["location"]["latitude"],
                 'longitude': result.data["installations"][i]["location"]["longitude"],
                 },
-                result.data["installations"][i]["locationroom"],
-                []
+                locationRoom: result.data["installations"][i]["locationroom"],
+                profiles: []
             ),
           );
         });

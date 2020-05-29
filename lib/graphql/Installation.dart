@@ -9,8 +9,8 @@ class Installation {
   String locationRoom;
   List<Profile> profiles;
 
-  Installation(this.title, this.desc, [this.zone, this.imgUrl, this.location,
-      this.locationRoom, this.profiles]);
+  Installation(this.title, this.desc, {this.zone, this.imgUrl, this.location,
+      this.locationRoom, this.profiles});
 }
 
 class InstallationQueries {
