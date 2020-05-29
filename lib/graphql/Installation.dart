@@ -27,7 +27,7 @@ class InstallationQueries {
           latitude
           longitude
         }
-        locationroom
+        locationRoom
         profile {
           name
           desc
@@ -51,7 +51,7 @@ class InstallationQueries {
           latitude
           longitude
         }
-        locationroom
+        locationRoom
         profile {
           name
           desc

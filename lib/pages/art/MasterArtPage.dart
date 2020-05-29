@@ -57,6 +57,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
                 profiles: []
             ),
           );
+          
         });
       }
     }
