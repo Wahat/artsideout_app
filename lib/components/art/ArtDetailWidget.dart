@@ -16,7 +16,18 @@ class ArtDetailWidget extends StatefulWidget {
 class _ArtDetailWidgetState extends State<ArtDetailWidget> {
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      decoration: BoxDecoration( 
+        color: Colors.white,
+        // borderRadius: BorderRadius.circular(25),
+        boxShadow: [ 
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5, 
+            blurRadius: 7, 
+            offset: Offset(10, 3),
+          ),
+        ],
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
