@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ArtListCard extends StatelessWidget {
   final String title;
@@ -51,7 +49,7 @@ class ArtListCard extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: Text(
                         title,
-                        style: GoogleFonts.quicksand(
+                        style: TextStyle(
                           color: Color(0xFFBE4C59),
                           fontSize: 15.5,
                           fontWeight: FontWeight.w600,
@@ -62,7 +60,7 @@ class ArtListCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          FontAwesomeIcons.mapMarkerAlt,
+                          Icons.location_on,
                           size: 16.0,
                           color: Color(0xFFBE4C59),
                         ),
@@ -70,10 +68,10 @@ class ArtListCard extends StatelessWidget {
                           fit: BoxFit.fitWidth,
                           child: Text(
                             '  ' + artist,
-                            style: GoogleFonts.quicksand(
+                            style: TextStyle(
                               color: Color(0xFFBE4C59),
                               fontWeight: FontWeight.w500,
-                              fontSize: 12.0,
+                              fontSize: 14.0,
                             ),
                           ),
                         ),
