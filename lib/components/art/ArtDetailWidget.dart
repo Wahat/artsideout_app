@@ -1,8 +1,6 @@
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:artsideout_app/graphql/Installation.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ArtDetailWidget extends StatefulWidget {
   final Installation data;
@@ -36,7 +34,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
               borderRadius: BorderRadius.circular(25.0),
             ),
             child: Container(
-              width: MediaQuery.of(context).size.width,
+              width: 450,
               height: 250,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -56,14 +54,9 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
             ),
             title: Text(
               'John Appleseed',
-              style: GoogleFonts.quicksand(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
-              ),
             ),
             trailing: IconButton(
-              icon: Icon(FontAwesomeIcons.solidBookmark),
+              icon: Icon(Icons.bookmark),
               color: asoPrimary,
               onPressed: () {},
             ),
