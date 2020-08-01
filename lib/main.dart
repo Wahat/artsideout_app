@@ -6,6 +6,9 @@ import 'package:artsideout_app/layout.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import "package:artsideout_app/graphql/config.dart";
 
+// Routing
+import 'package:artsideout_app/routing/router.dart';
+
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
 void main() {
@@ -22,6 +25,7 @@ class App extends StatelessWidget {
           title: 'ARTSIDEOUT',
           theme: appTheme,
           home: Layout(),
+          onGenerateRoute: Router.generateRoute,
         ));
   }
 }
