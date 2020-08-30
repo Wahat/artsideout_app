@@ -1,4 +1,5 @@
-// import 'dart:html';
+import 'dart:convert';
+import 'dart:html';
 
 import 'package:artsideout_app/components/activity/ActivityWebMenu.dart';
 import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
@@ -36,6 +37,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
   bool isLargeScreen = false;
   bool isMediumScreen = false;
   bool selected = false;
+  double headerFontSize;
 
   List<Activity> listActivity = List<Activity>();
   GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
@@ -77,7 +79,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
         //print(result.data["activities"][i]);
         // result.data["activities"][i]["image"]["url"] ??
 
-        String imgUrlTest = (result.data["activities"][i]["image"] != null)
+        String imgUrl = (result.data["activities"][i]["image"] != null)
             ? result.data["activities"][i]["image"]["url"]
             : "https://via.placeholder.com/350";
 
@@ -87,6 +89,13 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
           for (var j = 0;
               j < result.data["activities"][i]["profile"].length;
               j++) {
+            Map<String, String> socialMap = new Map();
+            for (var key
+                in result.data["activities"][i]["profile"][j]["social"].keys) {
+              socialMap[key] =
+                  result.data["activities"][i]["profile"][j]["social"][key];
+            }
+            /*
             Map<String, String> socialMap =
                 (result.data["activities"][i]["profile"][j]["social"] != null)
                     ? {
@@ -96,9 +105,14 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                         'pinterest': result.data["activities"][i]["profile"][j]
                                 ["social"]["pinterest"] ??
                             ""
-                      }
-                    : {'website': "", 'pinterest': ""};
-
+                      } //REMOVE
+                    : {
+                        'facebook': "",
+                        'instagram': "",
+                        'website': "",
+                        'pinterest': ""
+                      };
+                    */
             profilesList.add(Profile(
                 result.data["activities"][i]["profile"][j]["name"],
                 result.data["activities"][i]["profile"][j]["desc"],
@@ -133,7 +147,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                 result.data["activities"][i]["title"],
                 result.data["activities"][i]["desc"],
                 result.data["activities"][i]["zone"],
-                imgUrl: imgUrlTest,
+                imgUrl: imgUrl,
                 time: time,
                 location: location,
                 profiles: profilesList),
@@ -163,10 +177,15 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
           isMediumScreen = false;
           numCards = 2;
           // Tablet Size
-        } else if (MediaQuery.of(context).size.width > 600) {
+        } else if (MediaQuery.of(context).size.width > 1000) {
           secondFlexSize = 1;
-          isLargeScreen = true;
-          isMediumScreen = true;
+          isLargeScreen = false;
+          if (MediaQuery.of(context).size.height > 1300) {
+            isMediumScreen = false;
+          }
+          else {
+            isMediumScreen = true;
+          }
           numCards = MediaQuery.of(context).orientation == Orientation.portrait
               ? 2
               : 3;
@@ -176,8 +195,20 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
           isMediumScreen = false;
           numCards = 2;
         }
+
+        // "Activity" header font size
+        if (MediaQuery.of(context).size.width > 700) {
+          headerFontSize = 50.0;
+        } else if (MediaQuery.of(context).size.width > 440) { 
+          headerFontSize = 40.0;
+        } else if (MediaQuery.of(context).size.width > 330) {
+          headerFontSize = 35.0;
+        } else {
+          headerFontSize = 30.0;
+        }
+
         return Row(children: <Widget>[
-          (isLargeScreen)
+          (isLargeScreen || isMediumScreen)
             ? ActivityWebMenu( 
                 ListView.builder(
                         // Let the ListView know how many items it needs to build.
@@ -224,7 +255,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                       ),
             )
           : Expanded(
-              flex: 71,
+              flex: 70,
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -254,16 +285,18 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                   Stack( 
                     children: <Widget>[
                       Container(
-                        padding: const EdgeInsets.only(top: 60.0, left: 15.0, bottom: 20.0),
+                        padding: const EdgeInsets.only(top: 2.0, left: 15.0, bottom: 25.0),
                         color: Color(0xFFFCEAEB),
                         alignment: Alignment.centerLeft,
-                        child: Text(
+                        child: SafeArea(
+                          child: Text(
                           "Activities",
                           style: TextStyle( 
-                            fontWeight: FontWeight.bold,  
-                            fontSize: 35.0,
-                            fontFamily: 'Roboto',
-                            color: asoPrimary,
+                              fontWeight: FontWeight.bold,  
+                              fontSize: headerFontSize,
+                              fontFamily: 'Roboto',
+                              color: asoPrimary,
+                            ),
                           ),
                         ),
                       ),  
@@ -272,7 +305,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                         right: 0.0,
                         child: PlatformSvg.asset(
                           "assets/icons/activities.svg",
-                          width: 300,
+                          width: MediaQuery.of(context).size.width / 2,
                           height: 125,
                           fit: BoxFit.contain,
                           alignment: Alignment.topCenter,
