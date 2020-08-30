@@ -123,8 +123,6 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                         ["longitude"]
                   }
                 : {'latitude': -1.0, 'longitude': -1.0};
-
-
         Map<String, String> time = {
           'startTime': result.data["activities"][i]["startTime"] ?? "",
           'endTime': result.data["activities"][i]["endTime"] ?? ""
@@ -179,12 +177,6 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
           numCards = 2;
         }
         return Row(children: <Widget>[
-          (isLargeScreen)
-            ? Expanded( 
-                flex: 4, 
-                child: Sidebar(),
-              )
-            : Container(), 
           (isLargeScreen)
             ? ActivityWebMenu( 
                 ListView.builder(
