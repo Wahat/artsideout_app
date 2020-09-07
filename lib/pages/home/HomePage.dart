@@ -13,6 +13,8 @@ import 'package:artsideout_app/pages/home/HomeDetailPage.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 
+// Routes
+import 'package:artsideout_app/routing/routing_constants.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,13 +36,13 @@ class _HomePageState extends State<HomePage> {
 
   final List<HomeAction> listHomeActions = [
     HomeAction("News", Colors.purple[200], "assets/icons/activities.svg", 300,
-        MasterArtPage()),
+        MasterArtPage(), Routes.home),
     HomeAction("Art", Colors.blue[200], "assets/icons/installation.svg", 200,
-        MasterArtPage()),
+        MasterArtPage(), Routes.arts),
     HomeAction("Activities", Colors.yellow[200], "assets/icons/activities.svg",
-        300, MasterActivityPage()),
+        300, MasterActivityPage(), Routes.activities),
     HomeAction("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
-        MasterArtPage())
+        MasterArtPage(), Routes.home)
   ];
 
   @override
@@ -58,8 +60,7 @@ class _HomePageState extends State<HomePage> {
         }
         return Row(children: <Widget>[
           (isLargeScreen)
-              ? Expanded(
-                  flex: secondFlexSize, child: HomeDetailWidget())
+              ? Expanded(flex: secondFlexSize, child: HomeDetailWidget())
               : Container(),
           Expanded(
               flex: 1,
@@ -70,30 +71,33 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Positioned(
                     top: 0,
-                    right:0,
+                    right: 0,
                     left: 0,
                     bottom: MediaQuery.of(context).size.height / 3,
-                  child: GestureDetector(
-                    onTap: () {
-                      if (!isLargeScreen) {
-                      Navigator.push(context, CupertinoPageRoute(
-                        builder: (context) {
-                          return HomeDetailPage();
-                        },
-                      ));
-                      }
-                    },
-                    child: Header(
-                      image: "assets/icons/asoBg.svg",
-                      textTop: "ARTSIDEOUT",
-                      textBottom: "2020",
-                      subtitle: "Event Guide",
-                      offset: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (!isLargeScreen) {
+                          Navigator.pushNamed(context, Routes.home);
+
+                          // Navigator.push(context, CupertinoPageRoute(
+                          //   builder: (context) {
+                          //     return HomeDetailPage();
+                          //   },
+                          // ));
+                        }
+                      },
+                      child: Header(
+                        image: "assets/icons/asoBg.svg",
+                        textTop: "ARTSIDEOUT",
+                        textBottom: "2020",
+                        subtitle: "Event Guide",
+                        offset: 0,
+                      ),
                     ),
-                  ),),
+                  ),
                   Positioned(
                     top: MediaQuery.of(context).size.height / 3,
-                    right:0,
+                    right: 0,
                     left: 0,
                     bottom: 0,
                     child: StaggeredGridView.countBuilder(
@@ -103,11 +107,13 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                           child: GestureDetector(
                               onTap: () {
-                                Navigator.push(context, CupertinoPageRoute(
-                                  builder: (context) {
-                                    return listHomeActions[index].page;
-                                  },
-                                ));
+                                Navigator.pushNamed(
+                                    context, listHomeActions[index].route);
+                                // Navigator.push(context, CupertinoPageRoute(
+                                //   builder: (context) {
+                                //     return listHomeActions[index].page;
+                                //   },
+                                // ));
                               },
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20.0),
@@ -160,6 +166,8 @@ class HomeAction {
   String imgUrl;
   double imgWidth;
   Widget page;
+  String route;
 
-  HomeAction(this.title, this.color, this.imgUrl, this.imgWidth, this.page);
+  HomeAction(this.title, this.color, this.imgUrl, this.imgWidth, this.page,
+      this.route);
 }

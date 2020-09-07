@@ -10,7 +10,7 @@ import 'package:artsideout_app/components/card.dart';
 import 'package:artsideout_app/components/navigation.dart';
 // Art
 import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
-import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
+// import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 
 class MasterArtPage extends StatefulWidget {
   @override
@@ -46,8 +46,9 @@ class _MasterArtPageState extends State<MasterArtPage> {
         setState(() {
           listInstallation.add(
             Installation(
-              result.data["installations"][i]["title"],
-              result.data["installations"][i]["desc"],
+              id: result.data["installations"][i]["id"],
+              title: result.data["installations"][i]["title"],
+              desc: result.data["installations"][i]["desc"],
               zone: result.data["installations"][i]["zone"],
               imgUrl: result.data["installations"][i]["image"] == null
                   ? 'https://via.placeholder.com/350'
@@ -60,7 +61,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
                     ? 0.0
                     : result.data["installations"][i]["location"]["longitude"],
               },
-              locationRoom: result.data["installations"][i]["locationroom"],
+              // locationRoom: result.data["installations"][i]["locationroom"],
               profiles: [],
             ),
           );
@@ -130,8 +131,9 @@ class _MasterArtPageState extends State<MasterArtPage> {
                             // Convert each item into a widget based on the type of item it is.
                             itemBuilder: (context, index) {
                               final item = listInstallation[index];
+                              final String artID = item.id;
                               return Center(
-                                child: GestureDetector( 
+                                child: GestureDetector(
                                   child: ArtListCard(
                                     title: item.title,
                                     artist: item.zone,
@@ -142,14 +144,20 @@ class _MasterArtPageState extends State<MasterArtPage> {
                                       selectedValue = index;
                                       setState(() {});
                                     } else {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        CupertinoPageRoute(
-                                          builder: (context) {
-                                            return ArtDetailPage(item);
-                                          },
-                                        ),
+                                        "/arts?id=${item.id}",
+                                        arguments: item.id,
                                       );
+
+                                      // Navigator.push(
+                                      //   context,
+                                      //   CupertinoPageRoute(
+                                      //     builder: (context) {
+                                      // return ArtDetailPage(item);
+                                      //     },
+                                      //   ),
+                                      // );
                                     }
                                   },
                                 ),
