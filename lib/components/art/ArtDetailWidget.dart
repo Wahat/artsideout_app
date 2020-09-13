@@ -1,6 +1,6 @@
+import 'package:artsideout_app/models/Installation.dart';
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/graphql/Installation.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class ArtDetailWidget extends StatefulWidget {

@@ -1,4 +1,3 @@
-import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 // Pages
@@ -7,8 +6,9 @@ import 'package:artsideout_app/pages/home/HomePage.dart';
 import 'package:artsideout_app/components/home/HomeHeader.dart';
 
 import 'package:flutter/cupertino.dart';
-import 'package:artsideout_app/components/common.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
 
+// TODO remove hard coded values
 class HomeDetailWidget extends StatefulWidget {
   HomeDetailWidget(this.isMediumScreen, this.isLargeScreen,
       this.listHomeActions, this.onTabTapped);
@@ -33,10 +33,8 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
             child: Stack(
               fit: StackFit.passthrough,
               overflow: Overflow.clip,
-              //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Positioned(
-                  //color: Colors.black,
                   top: MediaQuery.of(context).size.height / 5,
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
@@ -46,32 +44,20 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
                     fit: BoxFit.fitWidth,
                     alignment: Alignment(0.5, 0.8),
                   ),
-                  //margin: EdgeInsets.fromLTRB(0, 100, 0, 0),
                 ),
                 Positioned(
                   top: 0,
                   right: 0,
                   left: 20,
                   bottom: MediaQuery.of(context).size.height / 3,
-                  child: GestureDetector(
-                    onTap: () {
-//                      if (!isLargeScreen) {
-//                        Navigator.push(context, CupertinoPageRoute(
-//                          builder: (context) {
-//                            return HomeDetailPage();
-//                          },
-//                        ));
-//                      }
-                    },
-                    child: Header(
-                      image: widget.isLargeScreen || widget.isMediumScreen
-                          ? "assets/icons/lightPinkBg.svg"
-                          : "assets/icons/roadBg.svg",
-                      textTop: "ARTSIDEOUT",
-                      textBottom: "2020",
-                      subtitle: "Connections",
-                      offset: 0,
-                    ),
+                  child: Header(
+                    image: widget.isLargeScreen || widget.isMediumScreen
+                        ? "assets/icons/lightPinkBg.svg"
+                        : "assets/icons/roadBg.svg",
+                    textTop: "ARTSIDEOUT",
+                    textBottom: "2020",
+                    subtitle: "Connections",
+                    offset: 0,
                   ),
                 ),
                 Positioned(
@@ -92,11 +78,6 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
                               setState(() {
                                 widget.onTabTapped(index);
                               });
-//                              Navigator.push(context, CupertinoPageRoute(
-//                                builder: (context) {
-//                                  return widget.listHomeActions[index].page;
-//                                },
-//                              ));
                             },
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -160,7 +141,8 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
 }
 
 double getItemHeightPC(index) {
-  if (index == 0 || index == 1) { //height
+  if (index == 0 || index == 1) {
+    //height
     return 1;
   } else if (index == 4) {
     return 1.4;

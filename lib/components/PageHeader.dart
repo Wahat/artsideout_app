@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/components/common.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
 
 class Header extends StatefulWidget {
   final String image;

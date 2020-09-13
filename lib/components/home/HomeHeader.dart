@@ -1,6 +1,6 @@
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/components/common.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
 
 class Header extends StatefulWidget {
   final String image;
@@ -27,21 +27,8 @@ class _HeaderState extends State<Header> {
     return ClipPath(
       clipper: MyClipper(),
       child: Container(
-        //padding: EdgeInsets.only(left: 20, top: 60, right: 20),
         height: 20,
         width: double.infinity,
-//        decoration: widget.isLargeScreen
-//            ? null
-//            : BoxDecoration(
-//                gradient: LinearGradient(
-//                  begin: Alignment.topRight,
-//                  end: Alignment.bottomLeft,
-//                  colors: [
-//                    Color(0xFFE5549B),
-//                    Color(0xfff30075),
-//                  ],
-//                ),
-//              ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
 
 class HomeDetailPage extends StatefulWidget {
   HomeDetailPage();

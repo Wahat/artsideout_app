@@ -1,6 +1,6 @@
 {
-    "name": "artsideout_app",
-    "short_name": "artsideout_app",
+    "name": "ARTSIDEOUT 2020",
+    "short_name": "ARTSIDEOUT",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",

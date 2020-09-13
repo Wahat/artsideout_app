@@ -2,26 +2,24 @@ import 'dart:convert';
 import 'dart:html';
 
 import 'package:artsideout_app/components/activity/ActivityWebMenu.dart';
-import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
-import 'package:artsideout_app/graphql/Profile.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
+import 'package:artsideout_app/models/Activity.dart';
+import 'package:artsideout_app/models/Profile.dart';
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // GraphQL
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:artsideout_app/graphql/config.dart';
-import 'package:artsideout_app/graphql/Activity.dart';
+import 'package:artsideout_app/graphql/GraphQLConfiguration.dart';
+import 'package:artsideout_app/graphql/ActivityQueries.dart';
 // Common
 import 'package:artsideout_app/components/PageHeader.dart';
 import 'package:artsideout_app/components/activitycard.dart';
 import 'package:artsideout_app/pages/home/HomePage.dart';
-import 'package:artsideout_app/components/home/Sidebar.dart';
-// import 'package:artsideout_app/components/navigation.dart';
 // Art
 import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
 import 'package:artsideout_app/pages/activity/ActivityDetailPage.dart';
-import 'package:artsideout_app/components/common.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 
 class MasterActivityPage extends StatefulWidget {

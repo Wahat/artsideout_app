@@ -1,7 +1,7 @@
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:artsideout_app/components/common.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
 
 class OptionCard extends StatefulWidget { 
   OptionCard(this.title, this.image, this.link);

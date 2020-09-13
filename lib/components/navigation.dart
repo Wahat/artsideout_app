@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:artsideout_app/components/placeholder.dart';
+import 'package:artsideout_app/components/common/placeholder.dart';
 import 'package:artsideout_app/pages/home/HomePage.dart';
 
 class NavigationItem {

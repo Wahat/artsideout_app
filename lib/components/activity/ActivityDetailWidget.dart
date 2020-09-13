@@ -1,13 +1,11 @@
 import 'package:artsideout_app/components/profile/ProfileDetailWidget.dart';
+import 'package:artsideout_app/models/Activity.dart';
+import 'package:artsideout_app/models/Profile.dart';
 import 'package:artsideout_app/pages/profile/ProfileDetailPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/graphql/Activity.dart';
-import 'package:artsideout_app/graphql/Profile.dart';
 import 'package:artsideout_app/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
 class ActivityDetailWidget extends StatefulWidget {
   final Activity data;
@@ -68,16 +66,6 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                         widget.activityOrProfile = 0;
                       });
                     })
-                /*child: RichText(
-                    text: TextSpan(
-                        text: 'BACK',
-                        style: TextStyle(fontSize: 15, color: Colors.red[200]),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            setState(() {
-                              widget.activityOrProfile = 0;
-                            });
-                          }))*/
                 ),
             ProfileDetailWidget(widget.profileToDetail)
           ]);

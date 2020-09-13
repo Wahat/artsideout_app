@@ -1,34 +1,19 @@
-import 'package:artsideout_app/graphql/Profile.dart';
-
-class Activity {
-  String title;
-  String desc;
-  String zone;
-  String imgUrl;
-  Map<String, String> time;
-  Map<String, double> location;
-  List<Profile> profiles;
-
-  Activity(this.title, this.desc, this.zone, {this.imgUrl, this.time,
-      this.location, this.profiles});
-}
-
-class ActivityQueries {
+class InstallationQueries {
   String getAll = """ 
     {
-      activities {
+      installations {
         title
         desc
         zone
+        videoUrl
         image {
           url
         }
-        startTime
-        endTime
         location {
           latitude
           longitude
         }
+        locationRoom
         profile {
           name
           desc
@@ -41,21 +26,18 @@ class ActivityQueries {
   String getOneByID(String id) {
     return """
     {
-      activity(where: {id: $id}) {
+      Installation(where: {id: $id}) {
         title
         desc
-        overview
         zone
         image {
           url
         }
-        startTime
-        endTime
         location {
           latitude
           longitude
         }
-        locationroom
+        locationRoom
         profile {
           name
           desc

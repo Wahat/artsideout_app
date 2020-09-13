@@ -1,14 +1,15 @@
+import 'package:artsideout_app/models/Installation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 // GraphQL
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:artsideout_app/graphql/config.dart';
-import 'package:artsideout_app/graphql/Installation.dart';
+import 'package:artsideout_app/graphql/GraphQLConfiguration.dart';
+import 'package:artsideout_app/graphql/InstallationQueries.dart';
 // Common
 import 'package:artsideout_app/components/PageHeader.dart';
 import 'package:artsideout_app/components/card.dart';
-import 'package:artsideout_app/components/common.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
 // Art
 import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
 import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
@@ -177,69 +178,54 @@ class _MasterArtPageState extends State<MasterArtPage> {
                                                 padding:
                                                     const EdgeInsets.fromLTRB(
                                                         10, 0, 10, 0),
-                                                child: GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-//                                                        Navigator.push(context,
-//                                                            CupertinoPageRoute(
-//                                                          builder: (context) {
-//                                                            return listActions[
-//                                                                    index]
-//                                                                .page;
-//                                                          },
-//                                                        ));
-//                                                        onTabTapped(index);
-                                                      });
-                                                    },
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                        child: Container(
-                                                          color:
-                                                              listActions[index]
-                                                                  .color,
-                                                          child: Stack(
-                                                            children: <Widget>[
-                                                              Positioned(
-                                                                top: -20,
-                                                                left: 10,
-                                                                child:
-                                                                    PlatformSvg
-                                                                        .asset(
+                                                child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                    child: Container(
+                                                        color:
+                                                            listActions[index]
+                                                                .color,
+                                                        child: Stack(
+                                                          children: <Widget>[
+                                                            Positioned(
+                                                              top: -20,
+                                                              left: 10,
+                                                              child: PlatformSvg
+                                                                  .asset(
+                                                                listActions[
+                                                                        index]
+                                                                    .imgUrl,
+                                                                width: listActions[
+                                                                        index]
+                                                                    .imgWidth,
+                                                                fit: BoxFit
+                                                                    .fitWidth,
+                                                                alignment:
+                                                                    Alignment
+                                                                        .topCenter,
+                                                              ),
+                                                            ),
+                                                            Align(
+                                                              alignment:
+                                                                  Alignment(
+                                                                      -0.8,
+                                                                      0.8),
+                                                              child: Text(
                                                                   listActions[
                                                                           index]
-                                                                      .imgUrl,
-                                                                  width: listActions[
-                                                                          index]
-                                                                      .imgWidth,
-                                                                  fit: BoxFit
-                                                                      .fitWidth,
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .topCenter,
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    Alignment(
-                                                                        -0.8,
-                                                                        0.8),
-                                                                child: Text(
-                                                                    listActions[
-                                                                            index]
-                                                                        .title,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .headline5
-                                                                        .copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color: Colors.white)),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                                      .title,
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .headline5
+                                                                      .copyWith(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              Colors.white)),
+                                                            ),
+                                                          ],
                                                         )))),
                                         staggeredTileBuilder: (int index) =>
                                             new StaggeredTile.count(

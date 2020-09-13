@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:artsideout_app/models/Activity.dart';
 import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
-import 'package:artsideout_app/graphql/Activity.dart';
 import 'package:artsideout_app/theme.dart';
 
 class ActivityDetailPage extends StatefulWidget {
@@ -17,15 +17,15 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( 
-        iconTheme: IconThemeData( 
-          color: Colors.black, 
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
         ),
-        elevation: 0.0, 
+        elevation: 0.0,
         backgroundColor: Colors.transparent,
-        title: Text( 
-          widget.data.title, 
-          style: TextStyle( 
+        title: Text(
+          widget.data.title,
+          style: TextStyle(
             color: asoPrimary,
           ),
         ),

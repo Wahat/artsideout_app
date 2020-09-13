@@ -1,14 +1,10 @@
 import 'package:artsideout_app/components/OptionCard.dart';
-import 'package:artsideout_app/components/activitycard.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:artsideout_app/components/common.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
 import 'package:artsideout_app/pages/home/HomePage.dart';
-import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
-import 'package:artsideout_app/pages/activity/ActivityDetailPage.dart';
 
 class ActivityWebMenu extends StatefulWidget {
   ActivityWebMenu(this.activityCard);

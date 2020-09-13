@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:artsideout_app/theme.dart';
 
 class SocialCard extends StatelessWidget {
   final String socialName;
@@ -22,31 +21,18 @@ class SocialCard extends StatelessWidget {
   Icon generateIcon(String name, double iconSize) {
     switch (name) {
       case "facebook":
-        {
-          return Icon(MdiIcons.facebook, size: iconSize);
-        }
-        break;
+        return Icon(MdiIcons.facebook, size: iconSize);
       case "instagram":
-        {
-          return Icon(MdiIcons.instagram, size: iconSize);
-        }
-        break;
+        return Icon(MdiIcons.instagram, size: iconSize);
       case "pinterest":
-        {
-          return Icon(MdiIcons.pinterest, size: iconSize);
-        }
-        break;
+        return Icon(MdiIcons.pinterest, size: iconSize);
       default:
-        {
-          return Icon(MdiIcons.web, size: iconSize);
-        }
-        break;
+        return Icon(MdiIcons.web, size: iconSize);
     }
   }
 
   Widget build(BuildContext context) {
     return Container(
-        // color: Colors.red[200],
         margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
         child: InkResponse(
           child: SizedBox(

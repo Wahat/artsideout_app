@@ -1,6 +1,6 @@
+import 'package:artsideout_app/models/Installation.dart';
 import 'package:flutter/material.dart';
 import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
-import 'package:artsideout_app/graphql/Installation.dart';
 import 'package:artsideout_app/theme.dart';
 
 class ArtDetailPage extends StatefulWidget {
@@ -30,11 +30,6 @@ class _ArtDetailPageState extends State<ArtDetailPage> {
         ),
         backgroundColor: Color(0x00000000),
         elevation: 0.0,
-//        backgroundColor: Colors.white,
-//        title: Text(
-//          widget.data.title,
-//          style: TextStyle(color: asoPrimary),
-//        ),
       ),
       body: ArtDetailWidget(data: widget.data),
     );

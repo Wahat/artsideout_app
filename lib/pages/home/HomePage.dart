@@ -1,22 +1,15 @@
-import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
+import 'package:artsideout_app/components/common/PlatformSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:artsideout_app/theme.dart';
-// GraphQL
-import 'package:artsideout_app/graphql/config.dart';
-import 'package:artsideout_app/graphql/Installation.dart';
-import 'package:artsideout_app/components/common.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 // Home
 import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
 import 'package:artsideout_app/components/home/HomeHeader.dart';
-import 'package:artsideout_app/pages/home/HomeDetailPage.dart';
 // Pages
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
-import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
-import 'package:artsideout_app/components/home/Sidebar.dart';
+import 'package:artsideout_app/components/common/Sidebar.dart';
 
 const int HOMEPAGE_INDEX = 10;
 class HomePage extends StatefulWidget {
@@ -29,9 +22,6 @@ class _HomePageState extends State<HomePage> {
   int secondFlexSize = 1;
   bool isLargeScreen = false;
   bool isMediumScreen = false; // tablet
-
-  List<Installation> listInstallation = List<Installation>();
-  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
   @override
   void initState() {

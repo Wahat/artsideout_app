@@ -3,6 +3,7 @@ import 'package:artsideout_app/theme.dart';
 
 const int HOMEPAGE_INDEX = 10;
 
+// TODO abstract to loop
 class Sidebar extends StatefulWidget {
   @override
   _SidebarState createState() => _SidebarState();

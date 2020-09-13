@@ -1,9 +1,9 @@
-import 'package:artsideout_app/components/home/SpeedDialMenu.dart';
+import 'package:artsideout_app/components/common/SpeedDialMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Pages
 import 'package:artsideout_app/pages/home/HomePage.dart';
-import 'package:artsideout_app/components/placeholder.dart';
+import 'package:artsideout_app/components/common/placeholder.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 
@@ -45,16 +45,6 @@ class _LayoutState extends State<Layout> {
 
       return Scaffold(
           extendBodyBehindAppBar: true,
-
-//            actions: <Widget>[
-//              for (var i = 0; i < _barItems.length; i++)
-//                IconButton(
-//                  icon: _barItems[i].icon,
-//                  onPressed: () {
-//                    onTabTapped(i);
-//                  },
-//                ),
-//            ],
           body: _barItems[_currentIndex].page);
     }
 
@@ -98,17 +88,6 @@ class _LayoutState extends State<Layout> {
             ],
           ),
         ),
-//        bottomNavigationBar: BottomNavigationBar(
-//          onTap: onTabTapped,
-//          currentIndex: _currentIndex,
-//          items: [
-//            for (var i = 0; i < _barItems.length; i++)
-//              BottomNavigationBarItem(
-//                icon: _barItems[i].icon,
-//                title: _barItems[i].title,
-//              )
-//          ],
-//        ),
       );
     }
 
