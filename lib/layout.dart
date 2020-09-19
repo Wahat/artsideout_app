@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Pages
 import 'package:artsideout_app/pages/home/HomePage.dart';
-import 'package:artsideout_app/components/common/placeholder.dart';
+import 'package:artsideout_app/components/common/Placeholder.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
+
+import 'components/common/PlatformSvg.dart';
 
 class Layout extends StatefulWidget {
   @override
@@ -42,53 +44,68 @@ class _LayoutState extends State<Layout> {
     Widget _buildTabletLayout() {
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-
-      return Scaffold(
-          extendBodyBehindAppBar: true,
-          body: _barItems[_currentIndex].page);
+      return Stack(children: <Widget>[
+        PlatformSvg.asset(
+          "assets/icons/asobg3.svg",
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+            backgroundColor: Colors.transparent,
+            extendBodyBehindAppBar: true,
+            body: _barItems[_currentIndex].page)
+      ]);
     }
 
     Widget _buildMobileLayout() {
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-      return Scaffold(
-        body: _barItems[_currentIndex].page,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton:
-            SpeedDialMenu(onTabTapped: onTabTapped, barItems: _barItems),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(50.0, 8.0, 8.0, 12.0),
-                child: IconButton(
-                  onPressed: () {
-                    onTabTapped(0);
-                  },
-                  icon: Icon(
-                    Icons.map,
-                    size: 29.0,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 50.0, 12.0),
-                child: IconButton(
-                  onPressed: () {
-                    onTabTapped(2);
-                  },
-                  icon: Icon(
-                    Icons.search,
-                    size: 28,
-                  ),
-                ),
-              ),
-            ],
-          ),
+      return Stack(children: <Widget>[
+        PlatformSvg.asset(
+          "assets/icons/asobg3.svg",
+          fit: BoxFit.fitHeight,
         ),
-      );
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: _barItems[_currentIndex].page,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton:
+              SpeedDialMenu(onTabTapped: onTabTapped, barItems: _barItems),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(50.0, 8.0, 8.0, 12.0),
+                  child: IconButton(
+                    onPressed: () {
+                      onTabTapped(0);
+                    },
+                    icon: Icon(
+                      Icons.map,
+                      size: 29.0,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 8.0, 50.0, 12.0),
+                  child: IconButton(
+                    onPressed: () {
+                      onTabTapped(2);
+                    },
+                    icon: Icon(
+                      Icons.search,
+                      size: 28,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ]);
     }
 
     bool _isLargeScreen = false;

@@ -1,11 +1,12 @@
+import 'package:artsideout_app/components/common/PageHeader.dart';
 import 'package:artsideout_app/components/common/PlatformSvg.dart';
+import 'package:artsideout_app/models/ASOCardInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:artsideout_app/theme.dart';
 // Home
 import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
-import 'package:artsideout_app/components/home/HomeHeader.dart';
 // Pages
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
@@ -28,26 +29,27 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  final List<HomeAction> listHomeActions = [
-    HomeAction("About Connections", Color(0xFF62BAA6),
-        "assets/icons/aboutConnections.svg", 350, MasterActivityPage()),
-    HomeAction("Event Information", asoPrimary, "assets/icons/asoBg.svg", 300,
+  final List<ASOCardInfo> listHomeActions = [
+    ASOCardInfo("About Connections", Color(0xFF62BAA6),
+        "assets/home/about.png", 350, MasterActivityPage()),
+    ASOCardInfo("Event Information", asoPrimary, "assets/home/event.png", 300,
         MasterActivityPage()),
-    HomeAction("News", Colors.purple[200], "assets/icons/activities.svg", 300,
+    ASOCardInfo("News", Colors.purple[200], "assets/home/news.png", 300,
         MasterArtPage()),
-    HomeAction("Art", Colors.blue[200], "assets/icons/installation.svg", 200,
+    ASOCardInfo("Studio\nInstallations", Colors.blue[200], "assets/home/installations.png", 200,
         MasterArtPage()),
-    HomeAction("Schedule", Colors.yellow[200], "assets/icons/activities.svg",
+    ASOCardInfo("Schedule", Colors.yellow[200], "assets/home/schedule.png",
         300, MasterActivityPage()),
-    HomeAction("Activities", Colors.yellow[200], "assets/icons/activities.svg",
+    ASOCardInfo("Performances", Colors.yellow[200], "assets/home/performances.png",
         300, MasterActivityPage()),
-    HomeAction("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
+    ASOCardInfo("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
         MasterArtPage())
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: OrientationBuilder(
         builder: (context, orientation) {
           if (MediaQuery.of(context).size.width > 1200) {
@@ -72,9 +74,6 @@ class _HomePageState extends State<HomePage> {
                         : HomeDetailWidget(isMediumScreen, isLargeScreen,
                             listHomeActions, onTabTapped),
                   )
-                : Container(),
-            (isLargeScreen)
-                ? Container()
                 : Expanded(
                     flex: 1,
                     child: Stack(
@@ -82,30 +81,6 @@ class _HomePageState extends State<HomePage> {
                       overflow: Overflow.clip,
                       //crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          left: 0,
-                          bottom: MediaQuery.of(context).size.height / 3,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (!isLargeScreen) {
-                                Navigator.push(context, CupertinoPageRoute(
-                                  builder: (context) {
-                                    return Container();
-                                  },
-                                ));
-                              }
-                            },
-                            child: Header(
-                              image: "assets/icons/lightPinkBg.svg",
-                              textTop: "ARTSIDEOUT",
-                              textBottom: "2020",
-                              subtitle: "Connections",
-                              offset: 0,
-                            ),
-                          ),
-                        ),
                         Positioned(
                           top: MediaQuery.of(context).size.height / 5.3,
                           right: 0,
@@ -221,12 +196,4 @@ int getItemWidth(index) {
   }
 }
 
-class HomeAction {
-  String title;
-  Color color;
-  String imgUrl;
-  double imgWidth;
-  Widget page;
 
-  HomeAction(this.title, this.color, this.imgUrl, this.imgWidth, this.page);
-}

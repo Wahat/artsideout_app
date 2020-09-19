@@ -1,3 +1,4 @@
+import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeDetailPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class _DetailPageState extends State<HomeDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: previewScreenBackground,
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),

@@ -28,15 +28,15 @@ class _SidebarState extends State<Sidebar> {
           Expanded(
             flex: 1,
             child: CircleAvatar(
-              radius: 35.0,
-              backgroundColor: Colors.white,
-            ),
+                radius: 35.0,
+                backgroundImage: NetworkImage("/assets/common/icon.png")),
           ),
           Expanded(
             flex: 1,
             child: IconButton(
               icon: Icon(Icons.home),
               iconSize: 40.0,
+              tooltip: 'Home',
               onPressed: () {
                 changeScreen(HOMEPAGE_INDEX);
               },
@@ -45,18 +45,9 @@ class _SidebarState extends State<Sidebar> {
           Expanded(
             flex: 1,
             child: IconButton(
-              icon: Icon(Icons.map),
-              iconSize: 40.0,
-              onPressed: () {
-                changeScreen(0);
-              },
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
               icon: Icon(Icons.search),
               iconSize: 40.0,
+              tooltip: 'Search',
               onPressed: () {
                 changeScreen(0);
               },
@@ -67,6 +58,7 @@ class _SidebarState extends State<Sidebar> {
             child: IconButton(
               icon: Icon(Icons.palette),
               iconSize: 40.0,
+              tooltip: 'Studio Installations',
               onPressed: () {
                 changeScreen(3);
               },
@@ -75,8 +67,9 @@ class _SidebarState extends State<Sidebar> {
           Expanded(
             flex: 1,
             child: IconButton(
-              icon: Icon(Icons.local_activity),
+              icon: Icon(Icons.group),
               iconSize: 40.0,
+              tooltip: 'Performances',
               onPressed: () {
                 changeScreen(5);
               },
@@ -87,6 +80,7 @@ class _SidebarState extends State<Sidebar> {
             child: IconButton(
               icon: Icon(Icons.bookmark),
               iconSize: 40.0,
+              tooltip: 'Saved',
               onPressed: () {
                 changeScreen(0);
               },
@@ -96,6 +90,7 @@ class _SidebarState extends State<Sidebar> {
       ),
     );
   }
+
   changeScreen(int index) {
     setState(() {
       widget.onTabTapped(index);

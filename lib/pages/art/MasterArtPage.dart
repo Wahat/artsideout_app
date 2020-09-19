@@ -1,4 +1,5 @@
 import 'package:artsideout_app/models/Installation.dart';
+import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -7,8 +8,8 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:artsideout_app/graphql/GraphQLConfiguration.dart';
 import 'package:artsideout_app/graphql/InstallationQueries.dart';
 // Common
-import 'package:artsideout_app/components/PageHeader.dart';
-import 'package:artsideout_app/components/card.dart';
+import 'package:artsideout_app/components/common/PageHeader.dart';
+import 'package:artsideout_app/components/art/ArtListCard.dart';
 import 'package:artsideout_app/components/common/PlatformSvg.dart';
 // Art
 import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
@@ -88,7 +89,16 @@ class _MasterArtPageState extends State<MasterArtPage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget artPageHeader = Container(
+      color: Color(0xFFF9EBEB),
+      padding: EdgeInsets.only(left: 12.0),
+      child: PageHeader(
+        textTop: "INSTALLATIONS",
+        subtitle: "Connections",
+      ),
+    );
     return Scaffold(
+      backgroundColor: previewScreenBackground,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -119,188 +129,149 @@ class _MasterArtPageState extends State<MasterArtPage> {
           children: <Widget>[
             Expanded(
               flex: secondFlexSize,
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                ),
-                child: Column(children: <Widget>[
-                  Container(
-                    color: Color(0xFFF9EBEB),
-                    padding: EdgeInsets.only(left: 12.0),
-                    child: Header(
-                      image: "assets/icons/lightPinkBg.svg",
-                      textTop: "INSTALLATIONS",
-                      subtitle: "Connections",
-                    ),
+              child: Stack(children: [
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: PageHeader(
+                    textTop: "",
+                    subtitle: "",
                   ),
-                  Expanded(
-                      child: Container(
-                    child: Stack(children: [
-                      Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Header(
-                          image: "assets/icons/lightPinkBg.svg",
-                          textTop: "",
-                          subtitle: "",
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.transparent,
-                        child: PlatformSvg.asset(
-                          "assets/icons/roadBg.svg",
-                          width: 300,
-                          height: double.infinity,
-                          fit: BoxFit.fitHeight,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          (isLargeScreen)
-                              ? Expanded(
-                                  flex: 4,
-                                  child: Container(
-                                    width: 325,
-                                    color: Colors.transparent,
-                                    child: Container(
-                                      child: StaggeredGridView.countBuilder(
-                                        padding: EdgeInsets.zero,
-                                        crossAxisCount: 1,
-                                        itemCount: listActions.length,
-                                        itemBuilder: (BuildContext context,
-                                                int index) =>
-                                            Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        10, 0, 10, 0),
-                                                child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
-                                                    child: Container(
-                                                        color:
-                                                            listActions[index]
-                                                                .color,
-                                                        child: Stack(
-                                                          children: <Widget>[
-                                                            Positioned(
-                                                              top: -20,
-                                                              left: 10,
-                                                              child: PlatformSvg
-                                                                  .asset(
-                                                                listActions[
-                                                                        index]
-                                                                    .imgUrl,
-                                                                width: listActions[
-                                                                        index]
-                                                                    .imgWidth,
-                                                                fit: BoxFit
-                                                                    .fitWidth,
-                                                                alignment:
-                                                                    Alignment
-                                                                        .topCenter,
-                                                              ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  Alignment(
-                                                                      -0.8,
-                                                                      0.8),
-                                                              child: Text(
-                                                                  listActions[
-                                                                          index]
-                                                                      .title,
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .headline5
-                                                                      .copyWith(
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          color:
-                                                                              Colors.white)),
-                                                            ),
-                                                          ],
-                                                        )))),
-                                        staggeredTileBuilder: (int index) =>
-                                            new StaggeredTile.count(
-                                          1,
-                                          0.57,
-                                        ),
-                                        mainAxisSpacing: 15.0,
-                                        crossAxisSpacing: 5.0,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Container(),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            flex: 7,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    (isLargeScreen)
+                        ? Expanded(
+                            flex: 4,
                             child: Container(
-                              width: 500,
+                              width: 325,
                               color: Colors.transparent,
-                              child: GridView.builder(
-                                padding: EdgeInsets.zero,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: numCards,
+                              child: Container(
+                                child: StaggeredGridView.countBuilder(
+                                  padding: EdgeInsets.zero,
+                                  crossAxisCount: 1,
+                                  itemCount: listActions.length,
+                                  itemBuilder: (BuildContext context,
+                                          int index) =>
+                                      Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              child: Container(
+                                                  color:
+                                                      listActions[index].color,
+                                                  child: Stack(
+                                                    children: <Widget>[
+                                                      Positioned(
+                                                        top: -20,
+                                                        left: 10,
+                                                        child:
+                                                            PlatformSvg.asset(
+                                                          listActions[index]
+                                                              .imgUrl,
+                                                          width:
+                                                              listActions[index]
+                                                                  .imgWidth,
+                                                          fit: BoxFit.fitWidth,
+                                                          alignment: Alignment
+                                                              .topCenter,
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment: Alignment(
+                                                            -0.8, 0.8),
+                                                        child: Text(
+                                                            listActions[index]
+                                                                .title,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headline5
+                                                                .copyWith(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: Colors
+                                                                        .white)),
+                                                      ),
+                                                    ],
+                                                  )))),
+                                  staggeredTileBuilder: (int index) =>
+                                      new StaggeredTile.count(
+                                    1,
+                                    0.57,
+                                  ),
+                                  mainAxisSpacing: 15.0,
                                   crossAxisSpacing: 5.0,
-                                  mainAxisSpacing: 5.0,
                                 ),
-                                // Let the ListView know how many items it needs to build.
-                                itemCount: listInstallation.length,
-                                // Provide a builder function. This is where the magic happens.
-                                // Convert each item into a widget based on the type of item it is.
-                                itemBuilder: (context, index) {
-                                  final item = listInstallation[index];
-                                  return Center(
-                                    child: GestureDetector(
-                                      child: ArtListCard(
-                                        title: item.title,
-                                        artist: item.zone,
-                                        image: item.videoURL == 'empty'
-                                            ? item.imgURL
-                                            : getThumbnail(item.videoURL),
-                                      ),
-                                      onTap: () {
-                                        if (isLargeScreen) {
-                                          setState(() {
-                                            selectedValue = index;
-                                          });
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            CupertinoPageRoute(
-                                              builder: (context) {
-                                                return ArtDetailPage(item);
-                                              },
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  );
-                                },
                               ),
                             ),
+                          )
+                        : Container(),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      flex: 7,
+                      child: Container(
+                        width: 500,
+                        color: Colors.transparent,
+                        child: GridView.builder(
+                          padding: EdgeInsets.zero,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: numCards,
+                            crossAxisSpacing: 5.0,
+                            mainAxisSpacing: 5.0,
                           ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                        ],
+                          // Let the ListView know how many items it needs to build.
+                          itemCount: listInstallation.length,
+                          // Provide a builder function. This is where the magic happens.
+                          // Convert each item into a widget based on the type of item it is.
+                          itemBuilder: (context, index) {
+                            final item = listInstallation[index];
+                            return Center(
+                              child: GestureDetector(
+                                child: ArtListCard(
+                                  title: item.title,
+                                  artist: item.zone,
+                                  image: item.videoURL == 'empty'
+                                      ? item.imgURL
+                                      : getThumbnail(item.videoURL),
+                                ),
+                                onTap: () {
+                                  if (isLargeScreen) {
+                                    setState(() {
+                                      selectedValue = index;
+                                    });
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                        builder: (context) {
+                                          return ArtDetailPage(item);
+                                        },
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ]),
-                  )),
-                ]),
-              ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
+                ),
+              ]),
             ),
 
             // If large screen, render installation detail page

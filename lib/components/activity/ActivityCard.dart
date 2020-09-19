@@ -276,7 +276,7 @@ class ActivityCard extends StatelessWidget {
                             padding: EdgeInsets.only(left: 20.0, right: 5.0, bottom: 15.0, top: 3.0),
                             alignment: Alignment.topLeft,
                             child: Icon(
-                              Icons.location_on,
+                              Icons.person,
                               size: zoneIconSize,
                               color: Color(0xFFBE4C59),
                             ),

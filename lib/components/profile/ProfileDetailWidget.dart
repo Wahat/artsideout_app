@@ -2,7 +2,7 @@ import 'package:artsideout_app/components/common/PlatformSvg.dart';
 import 'package:artsideout_app/models/Profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/components/socialCard.dart';
+import 'package:artsideout_app/components/profile/SocialCard.dart';
 
 class ProfileDetailWidget extends StatefulWidget {
   final Profile profile;

@@ -1,12 +1,9 @@
+import 'package:artsideout_app/components/common/ASOCard.dart';
+import 'package:artsideout_app/components/common/PageHeader.dart';
+import 'package:artsideout_app/models/ASOCardInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-// Pages
-import 'package:artsideout_app/pages/home/HomePage.dart';
-// Home
-import 'package:artsideout_app/components/home/HomeHeader.dart';
-
 import 'package:flutter/cupertino.dart';
-import 'package:artsideout_app/components/common/PlatformSvg.dart';
 
 // TODO remove hard coded values
 class HomeDetailWidget extends StatefulWidget {
@@ -15,7 +12,7 @@ class HomeDetailWidget extends StatefulWidget {
 
   final bool isMediumScreen;
   final bool isLargeScreen;
-  final List<HomeAction> listHomeActions;
+  final List<ASOCardInfo> listHomeActions;
   final Function onTabTapped;
 
   @override
@@ -23,9 +20,12 @@ class HomeDetailWidget extends StatefulWidget {
 }
 
 class _HomeDetailWidgetState extends State<HomeDetailWidget> {
+  Widget artPageHeader = PageHeader(
+    textTop: "ARTSIDEOUT 2020",
+    subtitle: "CONNECTIONS",
+  );
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       child: Row(
         children: <Widget>[
           Expanded(
@@ -35,35 +35,15 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
               overflow: Overflow.clip,
               children: <Widget>[
                 Positioned(
-                  top: MediaQuery.of(context).size.height / 5,
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: PlatformSvg.asset(
-                    "assets/icons/roadBg.svg",
-                    width: 1200, //300,
-                    fit: BoxFit.fitWidth,
-                    alignment: Alignment(0.5, 0.8),
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  left: 20,
-                  bottom: MediaQuery.of(context).size.height / 3,
-                  child: Header(
-                    image: widget.isLargeScreen || widget.isMediumScreen
-                        ? "assets/icons/lightPinkBg.svg"
-                        : "assets/icons/roadBg.svg",
-                    textTop: "ARTSIDEOUT",
-                    textBottom: "2020",
-                    subtitle: "Connections",
-                    offset: 0,
-                  ),
-                ),
+                    top: 0,
+                    right: 0,
+                    left: 0,
+                    bottom: MediaQuery.of(context).size.height / 3,
+                    child: artPageHeader),
                 Positioned(
                   top: MediaQuery.of(context).size.height / 10,
-                  right: 20,
-                  left: 20,
+                  right: 0,
+                  left: 0,
                   bottom: 0,
                   child: StaggeredGridView.countBuilder(
                     padding: EdgeInsets.only(top: 70),
@@ -73,46 +53,7 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
                     itemCount: widget.listHomeActions.length,
                     itemBuilder: (BuildContext context, int index) => Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                widget.onTabTapped(index);
-                              });
-                            },
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: Container(
-                                  color: widget.listHomeActions[index].color,
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Positioned(
-                                        top: -20,
-                                        left: 10,
-                                        child: PlatformSvg.asset(
-                                          widget.listHomeActions[index].imgUrl,
-                                          width: widget
-                                              .listHomeActions[index].imgWidth,
-                                          fit: BoxFit.fitWidth,
-                                          alignment: Alignment.topCenter,
-                                        ),
-                                      ),
-                                      new Align(
-                                        alignment: Alignment(-0.8, 0.8),
-                                        child: Text(
-                                            widget.listHomeActions[index].title,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5
-                                                .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color:
-                                                        index == 0 || index == 1
-                                                            ? Colors.white
-                                                            : Colors.black)),
-                                      ),
-                                    ],
-                                  ),
-                                )))),
+                        child: ASOCard(widget.listHomeActions[index], widget.onTabTapped, index, false)),
                     staggeredTileBuilder: (int index) =>
                         new StaggeredTile.count(
                       widget.isMediumScreen

@@ -59,6 +59,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
       // Passing controller to widgets below.
       controller: controller,
       child: Scaffold(
+        backgroundColor: previewScreenBackground,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return MediaQuery.removePadding(

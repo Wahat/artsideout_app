@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:artsideout_app/components/activity/ActivityWebMenu.dart';
 import 'package:artsideout_app/components/common/PlatformSvg.dart';
+import 'package:artsideout_app/models/ASOCardInfo.dart';
 import 'package:artsideout_app/models/Activity.dart';
 import 'package:artsideout_app/models/Profile.dart';
 import 'package:artsideout_app/theme.dart';
@@ -14,8 +14,8 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:artsideout_app/graphql/GraphQLConfiguration.dart';
 import 'package:artsideout_app/graphql/ActivityQueries.dart';
 // Common
-import 'package:artsideout_app/components/PageHeader.dart';
-import 'package:artsideout_app/components/activitycard.dart';
+import 'package:artsideout_app/components/common/PageHeader.dart';
+import 'package:artsideout_app/components/activity/ActivityCard.dart';
 import 'package:artsideout_app/pages/home/HomePage.dart';
 // Art
 import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
@@ -46,23 +46,6 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
     _fillList();
   }
 
-  final List<HomeAction> listHomeActions = [
-  HomeAction("Event Information", asoPrimary, "assets/icons/asoBg.svg", 300,
-      MasterActivityPage()),
-  HomeAction("About Connections", Color(0xFF62BAA6),
-      "assets/icons/aboutConnections.svg", 350, MasterActivityPage()),
-  HomeAction("News", Colors.purple[200], "assets/icons/activities.svg", 300,
-      MasterArtPage()),
-  HomeAction("Art", Colors.blue[200], "assets/icons/installation.svg", 200,
-      MasterArtPage()),
-  HomeAction("Schedule", Colors.yellow[200], "assets/icons/activities.svg",
-      300, MasterActivityPage()),
-  HomeAction("Activities", Colors.yellow[200], "assets/icons/activities.svg",
-      300, MasterActivityPage()),
-  HomeAction("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
-      MasterArtPage())
-  ];
-
   // Activity GraphQL Query
   void _fillList() async {
     ActivityQueries queryActivity = ActivityQueries();
@@ -74,9 +57,6 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
     );
     if (!result.hasException) {
       for (var i = 0; i < result.data["activities"].length; i++) {
-        //print(result.data["activities"][i]);
-        // result.data["activities"][i]["image"]["url"] ??
-
         String imgUrl = (result.data["activities"][i]["image"] != null)
             ? result.data["activities"][i]["image"]["url"]
             : "https://via.placeholder.com/350";
@@ -93,24 +73,6 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
               socialMap[key] =
                   result.data["activities"][i]["profile"][j]["social"][key];
             }
-            /*
-            Map<String, String> socialMap =
-                (result.data["activities"][i]["profile"][j]["social"] != null)
-                    ? {
-                        'website': result.data["activities"][i]["profile"][j]
-                                ["social"]["website"] ??
-                            "",
-                        'pinterest': result.data["activities"][i]["profile"][j]
-                                ["social"]["pinterest"] ??
-                            ""
-                      } //REMOVE
-                    : {
-                        'facebook': "",
-                        'instagram': "",
-                        'website': "",
-                        'pinterest': ""
-                      };
-                    */
             profilesList.add(Profile(
                 result.data["activities"][i]["profile"][j]["name"],
                 result.data["activities"][i]["profile"][j]["desc"],
@@ -118,14 +80,8 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                 type: result.data["activities"][i]["profile"][j]["type"] ?? "",
                 installations: [],
                 activities: []));
-            print(profilesList[j].name);
-            print(profilesList[j].social);
-            print(profilesList[j].type);
           }
         }
-
-        print(profilesList);
-
         Map<String, double> location =
             (result.data["activities"][i]["location"] != null)
                 ? {
@@ -153,14 +109,13 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
         });
       }
     }
-    print(listActivity);
   }
 
   @override
   Widget build(BuildContext context) {
     // if statements for render
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: previewScreenBackground,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -207,7 +162,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
 
         return Row(children: <Widget>[
           (isLargeScreen || isMediumScreen)
-            ? ActivityWebMenu( 
+            ? ActivityWebMenu(
                 ListView.builder(
                         // Let the ListView know how many items it needs to build.
                         itemCount: listActivity.length,
@@ -260,60 +215,9 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                   color: Color(0xFFFCEAEB),
                 ),
                 child: Column(children: <Widget>[
-                  // Header(
-                  //   image: "assets/icons/activities.svg",
-                  //   textTop: "ACTIVITIES",
-                  //   textBottom: "",
-                  //   subtitle: "",
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.only(top: 60.0, left: 15.0, bottom: 20.0),
-                  //   color: Color(0xFFFCEAEB),
-                  //   alignment: Alignment.centerLeft,
-                  //   child: Text(
-                  //     "Activities",
-                  //     style: TextStyle( 
-                  //       fontWeight: FontWeight.bold,  
-                  //       fontSize: 35.0,
-                  //       fontFamily: 'Roboto',
-                  //       color: asoPrimary,
-                  //     ),
-                  //   ),
-                  // ),
-                  Stack( 
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.only(top: 2.0, left: 15.0, bottom: 25.0),
-                        color: Color(0xFFFCEAEB),
-                        alignment: Alignment.centerLeft,
-                        child: SafeArea(
-                          child: Text(
-                          "Activities",
-                          style: TextStyle( 
-                              fontWeight: FontWeight.bold,  
-                              fontSize: headerFontSize,
-                              fontFamily: 'Roboto',
-                              color: asoPrimary,
-                            ),
-                          ),
-                        ),
-                      ),  
-                      Positioned(
-                        top: 0.0,
-                        right: 0.0,
-                        child: PlatformSvg.asset(
-                          "assets/icons/activities.svg",
-                          width: MediaQuery.of(context).size.width / 2,
-                          height: 125,
-                          fit: BoxFit.contain,
-                          alignment: Alignment.topCenter,
-                        ),
-                      ),                    
-                    ],
-                  ),
                   Expanded(
                     flex: secondFlexSize,
-                    child: Container( 
+                    child: Container(
                       color: Color(0xFFFCEAEB),
                       child: ListView.builder(
                         // Let the ListView know how many items it needs to build.

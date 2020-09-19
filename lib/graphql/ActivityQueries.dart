@@ -1,5 +1,3 @@
-import 'package:artsideout_app/graphql/ProfileQueries.dart';
-
 class ActivityQueries {
   String getAll = """ 
     {

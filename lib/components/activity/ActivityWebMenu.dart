@@ -1,4 +1,4 @@
-import 'package:artsideout_app/components/OptionCard.dart';
+import 'package:artsideout_app/components/activity/OptionCard.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
@@ -19,40 +19,10 @@ class _ActivityWebMenuState extends State<ActivityWebMenu> {
   Widget build(BuildContext context) {
     return Expanded( 
       flex: 71,
-      child: Container( 
-        color: Color(0xFFFCEAEB),
-        child: Stack( 
+      child: Stack(
           fit: StackFit.passthrough, 
           overflow: Overflow.clip, 
-          children: <Widget>[ 
-            Positioned( 
-              top: MediaQuery.of(context).size.height / 5, 
-              width: MediaQuery.of(context).size.width, 
-              height: MediaQuery.of(context).size.height, 
-              child: PlatformSvg.asset(
-                "assets/icons/roadBg.svg",
-                width: 1200, 
-                alignment: Alignment(-1.0, 0.2),
-              ),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              left: 20,
-              bottom: MediaQuery.of(context).size.height / 3,
-              child: Padding( 
-                padding: EdgeInsets.only(top: 20, left: 10),
-                child: Text(
-                  "Activities",
-                  style: TextStyle( 
-                    fontWeight: FontWeight.bold,  
-                    fontSize: 45.0,
-                    fontFamily: 'Roboto',
-                    color: asoPrimary,
-                  ),
-                ),  
-              ),
-            ),
+          children: <Widget>[
             Positioned( 
               top: MediaQuery.of(context).size.height / 10, 
               right: 20, 
@@ -119,7 +89,6 @@ class _ActivityWebMenuState extends State<ActivityWebMenu> {
             ),
           ],
         ),
-      ),
     );
   }
 }
