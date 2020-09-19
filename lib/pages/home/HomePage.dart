@@ -17,8 +17,11 @@ import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 import 'package:artsideout_app/components/home/Sidebar.dart';
+// Routes
+import 'package:artsideout_app/routing/routing_constants.dart';
 
 const int HOMEPAGE_INDEX = 10;
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,19 +43,19 @@ class _HomePageState extends State<HomePage> {
 
   final List<HomeAction> listHomeActions = [
     HomeAction("About Connections", Color(0xFF62BAA6),
-        "assets/icons/aboutConnections.svg", 350, MasterActivityPage()),
+        "assets/icons/aboutConnections.svg", 350, MasterActivityPage(), Routes.activities),
     HomeAction("Event Information", asoPrimary, "assets/icons/asoBg.svg", 300,
-        MasterActivityPage()),
+        MasterActivityPage(), Routes.activities),
     HomeAction("News", Colors.purple[200], "assets/icons/activities.svg", 300,
-        MasterArtPage()),
+        MasterArtPage(), Routes.home),
     HomeAction("Art", Colors.blue[200], "assets/icons/installation.svg", 200,
-        MasterArtPage()),
+  MasterArtPage(), Routes.arts),
     HomeAction("Schedule", Colors.yellow[200], "assets/icons/activities.svg",
-        300, MasterActivityPage()),
+        300, MasterActivityPage(), Routes.activities),
     HomeAction("Activities", Colors.yellow[200], "assets/icons/activities.svg",
-        300, MasterActivityPage()),
+        300, MasterActivityPage(), Routes.activities),
     HomeAction("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
-        MasterArtPage())
+        MasterArtPage(), Routes.arts)
   ];
 
   @override
@@ -134,13 +137,7 @@ class _HomePageState extends State<HomePage> {
                                           setState(() {
                                             onTabTapped(index);
                                           });
-                                         Navigator.push(context,
-                                             CupertinoPageRoute(
-                                           builder: (context) {
-                                             return listHomeActions[index]
-                                                 .page;
-                                           },
-                                         ));
+                                Navigator.pushNamed(context, listHomeActions[index].route);
                                         },
                                         child: ClipRRect(
                                             borderRadius:
@@ -237,6 +234,8 @@ class HomeAction {
   String imgUrl;
   double imgWidth;
   Widget page;
+  String route;
 
-  HomeAction(this.title, this.color, this.imgUrl, this.imgWidth, this.page);
+  HomeAction(this.title, this.color, this.imgUrl, this.imgWidth, this.page,
+      this.route);
 }

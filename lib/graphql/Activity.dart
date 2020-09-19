@@ -1,6 +1,7 @@
 import 'package:artsideout_app/graphql/Profile.dart';
 
 class Activity {
+  String id;
   String title;
   String desc;
   String zone;
@@ -9,14 +10,15 @@ class Activity {
   Map<String, double> location;
   List<Profile> profiles;
 
-  Activity(this.title, this.desc, this.zone, {this.imgUrl, this.time,
-      this.location, this.profiles});
+  Activity(this.id, this.title, this.desc, this.zone,
+      {this.imgUrl, this.time, this.location, this.profiles});
 }
 
 class ActivityQueries {
   String getAll = """ 
     {
       activities {
+        id
         title
         desc
         zone
@@ -41,10 +43,10 @@ class ActivityQueries {
   String getOneByID(String id) {
     return """
     {
-      activity(where: {id: $id}) {
+      activity(where: {id: ${id}}) {
+        id
         title
         desc
-        overview
         zone
         image {
           url

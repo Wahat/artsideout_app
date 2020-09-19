@@ -1,6 +1,7 @@
 import 'package:artsideout_app/graphql/Profile.dart';
 
 class Installation {
+  String id;
   String title;
   String desc;
   String zone;
@@ -10,8 +11,8 @@ class Installation {
   String locationRoom;
   List<Profile> profiles;
 
-  Installation(this.title, this.desc,
-      {this.zone,
+  Installation({this.id, this.title, this.desc,
+      this.zone,
       this.imgURL,
       this.videoURL,
       this.location,
@@ -23,6 +24,7 @@ class InstallationQueries {
   String getAll = """ 
     {
       installations {
+        id
         title
         desc
         zone
@@ -47,10 +49,12 @@ class InstallationQueries {
   String getOneByID(String id) {
     return """
     {
-      Installation(where: {id: $id}) {
+      installation (where: {id: "$id"}) {
+        id
         title
         desc
         zone
+        videoUrl
         image {
           url
         }

@@ -7,6 +7,9 @@ import 'package:artsideout_app/components/placeholder.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 
+// Named Routes
+import 'package:artsideout_app/routing/routing_constants.dart';
+
 class Layout extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -15,26 +18,27 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   final List<NavigationItem> _barItems = [
+    NavigationItem(Icon(Icons.home, color: Colors.black), Text("Home"),
+        HomePage(), Routes.home),
     NavigationItem(Icon(Icons.map, color: Colors.black), Text("Map"),
-        PlaceholderWidget(Colors.deepOrange)),
-    NavigationItem(
-        Icon(Icons.home, color: Colors.black), Text("Home"), HomePage()),
-    NavigationItem(Icon(Icons.search, color: Colors.black), Text("Search"),
-        PlaceholderWidget(Colors.green)),
-    NavigationItem(
-        Icon(Icons.palette, color: Colors.black), Text("Art"), MasterArtPage()),
+        PlaceholderWidget(Colors.deepOrange), Routes.arts),
+    NavigationItem(Icon(Icons.search), Text("Search"),
+        PlaceholderWidget(Colors.green), Routes.activities),
+    NavigationItem(Icon(Icons.palette, color: Colors.black), Text("Art"),
+        MasterArtPage(), Routes.arts),
     NavigationItem(Icon(Icons.event, color: Colors.black), Text("Activities"),
-        MasterActivityPage()),
+        MasterActivityPage(), Routes.activities),
     NavigationItem(
         Icon(
           Icons.bookmark,
           color: Colors.black,
         ),
         Text("Saved"),
-        MasterArtPage()),
+        MasterArtPage(),
+        Routes.arts)
   ];
 
   @override
@@ -44,18 +48,7 @@ class _LayoutState extends State<Layout> {
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 
       return Scaffold(
-          extendBodyBehindAppBar: true,
-
-//            actions: <Widget>[
-//              for (var i = 0; i < _barItems.length; i++)
-//                IconButton(
-//                  icon: _barItems[i].icon,
-//                  onPressed: () {
-//                    onTabTapped(i);
-//                  },
-//                ),
-//            ],
-          body: _barItems[_currentIndex].page);
+          extendBodyBehindAppBar: true, body: _barItems[_currentIndex].page);
     }
 
     Widget _buildMobileLayout() {
@@ -122,9 +115,7 @@ class _LayoutState extends State<Layout> {
   }
 
   void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    Navigator.pushNamed(context, _barItems[index].route);
   }
 }
 
@@ -132,6 +123,7 @@ class NavigationItem {
   Icon icon;
   Text title;
   Widget page;
+  String route;
 
-  NavigationItem(this.icon, this.title, this.page);
+  NavigationItem(this.icon, this.title, this.page, this.route);
 }

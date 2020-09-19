@@ -4,6 +4,7 @@ import 'dart:html';
 import 'package:artsideout_app/components/activity/ActivityWebMenu.dart';
 import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
 import 'package:artsideout_app/graphql/Profile.dart';
+import 'package:artsideout_app/routing/routing_constants.dart';
 import 'package:artsideout_app/theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -50,19 +51,19 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
 
   final List<HomeAction> listHomeActions = [
   HomeAction("Event Information", asoPrimary, "assets/icons/asoBg.svg", 300,
-      MasterActivityPage()),
+      MasterActivityPage(), Routes.activities),
   HomeAction("About Connections", Color(0xFF62BAA6),
-      "assets/icons/aboutConnections.svg", 350, MasterActivityPage()),
+      "assets/icons/aboutConnections.svg", 350, MasterActivityPage(),  Routes.activities),
   HomeAction("News", Colors.purple[200], "assets/icons/activities.svg", 300,
-      MasterArtPage()),
+      MasterArtPage(),  Routes.arts),
   HomeAction("Art", Colors.blue[200], "assets/icons/installation.svg", 200,
-      MasterArtPage()),
+      MasterArtPage(),  Routes.arts),
   HomeAction("Schedule", Colors.yellow[200], "assets/icons/activities.svg",
-      300, MasterActivityPage()),
+      300, MasterActivityPage(),  Routes.activities),
   HomeAction("Activities", Colors.yellow[200], "assets/icons/activities.svg",
-      300, MasterActivityPage()),
+      300, MasterActivityPage(), Routes.activities),
   HomeAction("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
-      MasterArtPage())
+      MasterArtPage(), Routes.arts)
   ];
 
   // Activity GraphQL Query
@@ -144,6 +145,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
         setState(() {
           listActivity.add(
             Activity(
+                result.data["activities"][i]["id"],
                 result.data["activities"][i]["title"],
                 result.data["activities"][i]["desc"],
                 result.data["activities"][i]["zone"],
@@ -217,6 +219,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                         // Convert each item into a widget based on the type of item it is.
                         itemBuilder: (context, index) {
                           final item = listActivity[index];
+                          final String activityID = item.id;
                           return AnimatedContainer(
                             duration: Duration(milliseconds: 50),
                             curve: Curves.fastOutSlowIn,
@@ -236,13 +239,10 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                                       selectedValue = index;
                                       setState(() {});
                                     } else {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        CupertinoPageRoute(
-                                          builder: (context) {
-                                            return ActivityDetailPage(item);
-                                          },
-                                        ),
+                                        "/arts?id=${activityID}",
+                                        arguments: (activityID),
                                       );
                                     }
                                   },
@@ -324,6 +324,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                         // Convert each item into a widget based on the type of item it is.
                         itemBuilder: (context, index) {
                           final item = listActivity[index];
+                          final String activityID = item.id;
                           return AnimatedContainer(
                             duration: Duration(milliseconds: 50),
                             curve: Curves.fastOutSlowIn,
@@ -343,13 +344,10 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                                       selectedValue = index;
                                       setState(() {});
                                     } else {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        CupertinoPageRoute(
-                                          builder: (context) {
-                                            return ActivityDetailPage(item);
-                                          },
-                                        ),
+                                        "/arts?id=${activityID}",
+                                        arguments: (activityID),
                                       );
                                     }
                                   },
