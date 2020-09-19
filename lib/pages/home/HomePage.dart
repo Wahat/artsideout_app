@@ -11,8 +11,11 @@ import 'package:artsideout_app/components/home/HomeDetailWidget.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 import 'package:artsideout_app/components/common/Sidebar.dart';
+// Routes
+import 'package:artsideout_app/routing/routing_constants.dart';
 
 const int HOMEPAGE_INDEX = 10;
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -31,19 +34,19 @@ class _HomePageState extends State<HomePage> {
 
   final List<ASOCardInfo> listHomeActions = [
     ASOCardInfo("About Connections", Color(0xFF62BAA6),
-        "assets/home/about.png", 350, MasterActivityPage()),
+        "assets/home/about.png", 350, MasterActivityPage(), Routes.activities),
     ASOCardInfo("Event Information", asoPrimary, "assets/home/event.png", 300,
-        MasterActivityPage()),
+        MasterActivityPage(), Routes.activities),
     ASOCardInfo("News", Colors.purple[200], "assets/home/news.png", 300,
-        MasterArtPage()),
+        MasterArtPage(), Routes.activities),
     ASOCardInfo("Studio\nInstallations", Colors.blue[200], "assets/home/installations.png", 200,
-        MasterArtPage()),
+        MasterArtPage(), Routes.activities),
     ASOCardInfo("Schedule", Colors.yellow[200], "assets/home/schedule.png",
-        300, MasterActivityPage()),
+        300, MasterActivityPage(), Routes.activities),
     ASOCardInfo("Performances", Colors.yellow[200], "assets/home/performances.png",
-        300, MasterActivityPage()),
+        300, MasterActivityPage(), Routes.activities),
     ASOCardInfo("Saved", Colors.orange[200], "assets/icons/saved.svg", 200,
-        MasterArtPage())
+        MasterArtPage(), Routes.arts)
   ];
 
   @override
@@ -99,13 +102,7 @@ class _HomePageState extends State<HomePage> {
                                           setState(() {
                                             onTabTapped(index);
                                           });
-                                         Navigator.push(context,
-                                             CupertinoPageRoute(
-                                           builder: (context) {
-                                             return listHomeActions[index]
-                                                 .page;
-                                           },
-                                         ));
+                                Navigator.pushNamed(context, listHomeActions[index].route);
                                         },
                                         child: ClipRRect(
                                             borderRadius:
@@ -195,5 +192,3 @@ int getItemWidth(index) {
     return 1;
   }
 }
-
-

@@ -2,6 +2,7 @@ class ActivityQueries {
   String getAll = """ 
     {
       activities {
+        id
         title
         desc
         zone
@@ -26,10 +27,10 @@ class ActivityQueries {
   String getOneByID(String id) {
     return """
     {
-      activity(where: {id: $id}) {
+      activity(where: {id: ${id}}) {
+        id
         title
         desc
-        overview
         zone
         image {
           url

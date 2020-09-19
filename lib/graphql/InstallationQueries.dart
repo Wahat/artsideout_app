@@ -2,6 +2,7 @@ class InstallationQueries {
   String getAll = """ 
     {
       installations {
+        id
         title
         desc
         zone
@@ -26,10 +27,12 @@ class InstallationQueries {
   String getOneByID(String id) {
     return """
     {
-      Installation(where: {id: $id}) {
+      installation (where: {id: "$id"}) {
+        id
         title
         desc
         zone
+        videoUrl
         image {
           url
         }

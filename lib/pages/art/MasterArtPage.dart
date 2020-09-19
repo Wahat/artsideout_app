@@ -16,6 +16,7 @@ import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
 import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+// import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 
 class MasterArtPage extends StatefulWidget {
   @override
@@ -52,8 +53,9 @@ class _MasterArtPageState extends State<MasterArtPage> {
         setState(() {
           listInstallation.add(
             Installation(
-              result.data["installations"][i]["title"],
-              result.data["installations"][i]["desc"],
+              id: result.data["installations"][i]["id"],
+              title: result.data["installations"][i]["title"],
+              desc: result.data["installations"][i]["desc"],
               zone: result.data["installations"][i]["zone"],
               imgURL: result.data["installations"][i]["image"] == null
                   ? 'https://via.placeholder.com/350'
@@ -130,14 +132,6 @@ class _MasterArtPageState extends State<MasterArtPage> {
             Expanded(
               flex: secondFlexSize,
               child: Stack(children: [
-                Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: PageHeader(
-                    textTop: "",
-                    subtitle: "",
-                  ),
-                ),
                 Row(
                   children: [
                     SizedBox(
@@ -250,13 +244,10 @@ class _MasterArtPageState extends State<MasterArtPage> {
                                       selectedValue = index;
                                     });
                                   } else {
-                                    Navigator.push(
+                                    Navigator.pushNamed(
                                       context,
-                                      CupertinoPageRoute(
-                                        builder: (context) {
-                                          return ArtDetailPage(item);
-                                        },
-                                      ),
+                                      "/arts?id=${item.id}",
+                                      arguments: item.id,
                                     );
                                   }
                                 },

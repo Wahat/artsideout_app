@@ -1,6 +1,7 @@
 import 'package:artsideout_app/models/Profile.dart';
 
 class Installation {
+  String id;
   String title;
   String desc;
   String zone;
@@ -10,11 +11,14 @@ class Installation {
   String locationRoom;
   List<Profile> profiles;
 
-  Installation(this.title, this.desc,
-      {this.zone,
-        this.imgURL,
-        this.videoURL,
-        this.location,
-        this.locationRoom,
-        this.profiles});
+  Installation(
+      {this.id,
+      this.title,
+      this.desc,
+      this.zone,
+      this.imgURL,
+      this.videoURL,
+      this.location,
+      this.locationRoom,
+      this.profiles});
 }

@@ -98,9 +98,10 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
         setState(() {
           listActivity.add(
             Activity(
-                result.data["activities"][i]["title"],
-                result.data["activities"][i]["desc"],
-                result.data["activities"][i]["zone"],
+                id: result.data["activities"][i]["id"],
+                title: result.data["activities"][i]["title"],
+                desc: result.data["activities"][i]["desc"],
+                zone: result.data["activities"][i]["zone"],
                 imgUrl: imgUrl,
                 time: time,
                 location: location,
@@ -170,6 +171,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                         // Convert each item into a widget based on the type of item it is.
                         itemBuilder: (context, index) {
                           final item = listActivity[index];
+                          final String activityID = item.id;
                           return AnimatedContainer(
                             duration: Duration(milliseconds: 50),
                             curve: Curves.fastOutSlowIn,
@@ -189,13 +191,10 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                                       selectedValue = index;
                                       setState(() {});
                                     } else {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        CupertinoPageRoute(
-                                          builder: (context) {
-                                            return ActivityDetailPage(item);
-                                          },
-                                        ),
+                                        "/arts?id=${activityID}",
+                                        arguments: (activityID),
                                       );
                                     }
                                   },
@@ -226,6 +225,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                         // Convert each item into a widget based on the type of item it is.
                         itemBuilder: (context, index) {
                           final item = listActivity[index];
+                          final String activityID = item.id;
                           return AnimatedContainer(
                             duration: Duration(milliseconds: 50),
                             curve: Curves.fastOutSlowIn,
@@ -245,13 +245,10 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                                       selectedValue = index;
                                       setState(() {});
                                     } else {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        CupertinoPageRoute(
-                                          builder: (context) {
-                                            return ActivityDetailPage(item);
-                                          },
-                                        ),
+                                        "/arts?id=${activityID}",
+                                        arguments: (activityID),
                                       );
                                     }
                                   },
