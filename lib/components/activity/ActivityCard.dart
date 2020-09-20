@@ -1,7 +1,7 @@
 // import 'package:artsideout_app/pages/activity/ActivityDetailPage.dart';
 // import 'dart:async';
+import 'package:artsideout_app/constants/ColorConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/theme.dart';
 
 class ActivityCard extends StatelessWidget {
   final String title;
@@ -174,7 +174,7 @@ class ActivityCard extends StatelessWidget {
                                 fontWeight: FontWeight.w900,  
                                 fontSize: startFontSize,
                                 fontFamily: 'Roboto',
-                                color: asoPrimary,
+                                color: ColorConstants.asoPrimary,
                               ),
                             ),
                           ),
@@ -213,7 +213,7 @@ class ActivityCard extends StatelessWidget {
                                 fontWeight: FontWeight.w900,  
                                 fontSize: endFontSize,
                                 fontFamily: 'Roboto',
-                                color: asoPrimary,
+                                color: ColorConstants.asoPrimary,
                               ),
                             ),
                           ),
@@ -237,7 +237,7 @@ class ActivityCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: titleFontSize, 
                             fontWeight: FontWeight.bold,
-                            color: asoPrimary,
+                            color: ColorConstants.asoPrimary,
                           ),
                         ),
                       ),
@@ -288,7 +288,7 @@ class ActivityCard extends StatelessWidget {
                               displayZone(zone),
                               style: TextStyle(
                                 fontSize: zoneFontSize,
-                                color: asoPrimary,
+                                color: ColorConstants.asoPrimary,
                               ),
                               overflow: TextOverflow.clip,
                               maxLines: 3,

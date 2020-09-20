@@ -39,6 +39,7 @@ dependencies:
   material_design_icons_flutter: 4.0.5345
   youtube_player_iframe: ^1.1.0
   http: ^0.12.2
+  get_it: ^5.0.0
 
 dev_dependencies:
   flutter_test:

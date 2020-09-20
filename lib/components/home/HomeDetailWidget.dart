@@ -8,12 +8,11 @@ import 'package:flutter/cupertino.dart';
 // TODO remove hard coded values
 class HomeDetailWidget extends StatefulWidget {
   HomeDetailWidget(this.isMediumScreen, this.isLargeScreen,
-      this.listHomeActions, this.onTabTapped);
+      this.listHomeActions);
 
   final bool isMediumScreen;
   final bool isLargeScreen;
   final List<ASOCardInfo> listHomeActions;
-  final Function onTabTapped;
 
   @override
   _HomeDetailWidgetState createState() => _HomeDetailWidgetState();
@@ -53,13 +52,13 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
                     itemCount: widget.listHomeActions.length,
                     itemBuilder: (BuildContext context, int index) => Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: ASOCard(widget.listHomeActions[index], widget.onTabTapped, index, false)),
+                        child: ASOCard(widget.listHomeActions[index], index, false)),
                     staggeredTileBuilder: (int index) =>
                         new StaggeredTile.count(
-                      widget.isMediumScreen
+                      widget.isMediumScreen || !widget.isLargeScreen
                           ? getItemWidthTablet(index)
                           : getItemWidthPC(index),
-                      widget.isMediumScreen
+                      widget.isMediumScreen || !widget.isLargeScreen
                           ? getItemHeightTablet(index)
                           : getItemHeightPC(index),
                     ),
@@ -68,13 +67,6 @@ class _HomeDetailWidgetState extends State<HomeDetailWidget> {
               ],
             ),
           ),
-          Expanded(
-              flex: 3,
-              child: Center(
-                child: Container(
-                  child: Text("Hello Bye"),
-                ),
-              )),
         ],
       ),
     );

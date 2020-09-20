@@ -1,24 +1,23 @@
 import 'package:artsideout_app/components/profile/ProfileDetailWidget.dart';
+import 'package:artsideout_app/constants/ColorConstants.dart';
 import 'package:artsideout_app/models/Activity.dart';
 import 'package:artsideout_app/models/Profile.dart';
 import 'package:artsideout_app/pages/profile/ProfileDetailPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class ActivityDetailWidget extends StatefulWidget {
   final Activity data;
-  int activityOrProfile = 0;
-  Profile profileToDetail;
-
-  ActivityDetailWidget(this.data);
+  ActivityDetailWidget({Key key, this.data}) : super(key: key);
 
   @override
   _ActivityDetailWidgetState createState() => _ActivityDetailWidgetState();
 }
 
 class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
+  int activityOrProfile = 0;
+  Profile profileToDetail;
   String startTimeDisplay(String startTimeGiven, BuildContext context) {
     if (startTimeGiven == "") {
       return "ALL DAY";
@@ -53,7 +52,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.activityOrProfile == 1) {
+    if (activityOrProfile == 1) {
       return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -63,11 +62,10 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
                       setState(() {
-                        widget.activityOrProfile = 0;
+                        activityOrProfile = 0;
                       });
-                    })
-                ),
-            ProfileDetailWidget(widget.profileToDetail)
+                    })),
+            ProfileDetailWidget(profileToDetail)
           ]);
     } else
       return Container(
@@ -94,7 +92,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
             ),
             ListTile(
               leading: CircleAvatar(
-                backgroundColor: asoPrimary,
+                backgroundColor: ColorConstants.asoPrimary,
                 radius: 25.0,
               ),
               title: Column(
@@ -121,7 +119,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
               ),
               trailing: IconButton(
                 icon: Icon(Icons.bookmark),
-                color: asoPrimary,
+                color: ColorConstants.asoPrimary,
                 onPressed: () {
                   print('Save button pressed! uwu');
                 },
@@ -130,7 +128,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
             ListTile(
                 leading: Text(displayZone(widget.data.zone),
                     style: TextStyle(
-                      color: asoPrimary,
+                      color: ColorConstants.asoPrimary,
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
                     ))),
@@ -145,7 +143,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
               leading: Text(
                 'OVERVIEW',
                 style: TextStyle(
-                  color: asoPrimary,
+                  color: ColorConstants.asoPrimary,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
                 ),
@@ -169,7 +167,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
             ListTile(
                 leading: Text('ORGANIZERS',
                     style: TextStyle(
-                      color: asoPrimary,
+                      color: ColorConstants.asoPrimary,
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                     ))),
@@ -210,8 +208,8 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                                   );
                                 } else {
                                   setState(() {
-                                    widget.activityOrProfile = 1;
-                                    widget.profileToDetail = profile;
+                                    activityOrProfile = 1;
+                                    profileToDetail = profile;
                                   });
                                 }
                               })

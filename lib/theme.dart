@@ -1,11 +1,8 @@
+import 'package:artsideout_app/constants/ColorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData appTheme = buildTheme();
-
-final Color previewScreenBackground = Colors.white60;
-final Color asoPrimary = Color(0xFFF30075);
-final Color asoSecondary = Color(0xFFF30075);
 
 ThemeData buildTheme() {
   final ThemeData base = ThemeData.light();
@@ -13,23 +10,20 @@ ThemeData buildTheme() {
   return base.copyWith(
     textTheme: _buildDefaultTextTheme(base.textTheme),
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    primaryColor: asoPrimary,
+    primaryColor: ColorConstants.asoPrimary,
   );
 }
 
 TextTheme _buildDefaultTextTheme(TextTheme base) {
-  final textTheme = GoogleFonts.latoTextTheme(base);
-  return textTheme.copyWith(
+  return GoogleFonts.latoTextTheme(base).copyWith(
     headline3: GoogleFonts.lato(
         textStyle: base.headline3,
         fontWeight: FontWeight.w900,
-        color: asoPrimary
-    ),
+        color: ColorConstants.asoPrimary),
     headline4: GoogleFonts.lato(
         textStyle: base.headline4,
         fontWeight: FontWeight.w900,
-        color: asoPrimary
-    ),
+        color: ColorConstants.asoPrimary),
     headline5: GoogleFonts.lato(
       textStyle: base.headline5,
       fontWeight: FontWeight.w700,

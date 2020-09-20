@@ -7,9 +7,7 @@ class ASOCardInfo {
   Color color;
   String imgUrl;
   double imgWidth;
-  Widget page;
   String route;
 
-  ASOCardInfo(this.title, this.color, this.imgUrl, this.imgWidth, this.page,
-      this.route);
+  ASOCardInfo(this.title, this.color, this.imgUrl, this.imgWidth, this.route);
 }

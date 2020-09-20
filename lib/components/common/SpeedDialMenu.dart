@@ -1,16 +1,13 @@
+import 'package:artsideout_app/constants/ASORouteConstants.dart';
+import 'package:artsideout_app/constants/ColorConstants.dart';
+import 'package:artsideout_app/serviceLocator.dart';
+import 'package:artsideout_app/services/NavigationService.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/theme.dart';
-import 'package:artsideout_app/layout.dart' as Layout;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class SpeedDialMenu extends StatefulWidget {
   @override
   _SpeedDialMenuState createState() => _SpeedDialMenuState();
-
-  final Function onTabTapped;
-  final List<Layout.NavigationItem> barItems;
-
-  SpeedDialMenu({this.onTabTapped, this.barItems});
 }
 
 class _SpeedDialMenuState extends State<SpeedDialMenu> {
@@ -19,48 +16,48 @@ class _SpeedDialMenuState extends State<SpeedDialMenu> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
+    final NavigationService _navigationService = serviceLocator<NavigationService>();
+
     return SpeedDial(
-      backgroundColor: asoPrimary,
-      animatedIcon: AnimatedIcons.home_menu,
-      marginBottom: (height / 10),
+      backgroundColor: ColorConstants.asoPrimary,
+      animatedIcon: AnimatedIcons.view_list,
+      marginBottom: (height / 20),
       marginRight: (width / 2) - 15,
       children: [
         SpeedDialChild(
-            child: widget.barItems[3].icon,
+            child: Icon(Icons.palette, color: Colors.black),
             backgroundColor: Colors.white,
-            label: widget.barItems[3].title.data,
+            label: "Studio Installations",
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {
               setState(() {
-                widget.onTabTapped(3);
+                _navigationService.navigateTo(ASORoutes.arts);
               });
             }),
         SpeedDialChild(
-            child: widget.barItems[4].icon,
+            child: Icon(Icons.event, color: Colors.black),
             backgroundColor: Colors.white,
-            label: widget.barItems[4].title.data,
+            label: "Performances",
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {
               setState(() {
-                widget.onTabTapped(4);
+                _navigationService.navigateTo(ASORoutes.activities);
               });
             }),
         SpeedDialChild(
-            child: widget.barItems[5].icon,
+            child: Icon(
+              Icons.bookmark,
+              color: Colors.black,
+            ),
             backgroundColor: Colors.white,
-            label: widget.barItems[5].title.data,
+            label: "Saved",
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {
               setState(() {
-                widget.onTabTapped(5);
+                _navigationService.navigateTo(ASORoutes.activities);
               });
             }),
       ],
-      onPress: () {
-        setState(() {
-          widget.onTabTapped(1);
-        });
-      },
     );
   }
 }

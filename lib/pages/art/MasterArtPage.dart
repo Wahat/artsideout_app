@@ -1,11 +1,13 @@
+import 'package:artsideout_app/constants/ColorConstants.dart';
+import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/models/Installation.dart';
-import 'package:artsideout_app/theme.dart';
+import 'package:artsideout_app/models/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 // GraphQL
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:artsideout_app/graphql/GraphQLConfiguration.dart';
+import 'package:artsideout_app/services/GraphQLConfiguration.dart';
 import 'package:artsideout_app/graphql/InstallationQueries.dart';
 // Common
 import 'package:artsideout_app/components/common/PageHeader.dart';
@@ -13,10 +15,8 @@ import 'package:artsideout_app/components/art/ArtListCard.dart';
 import 'package:artsideout_app/components/common/PlatformSvg.dart';
 // Art
 import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
-import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 import 'package:artsideout_app/pages/activity/MasterActivityPage.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-// import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 
 class MasterArtPage extends StatefulWidget {
   @override
@@ -50,19 +50,38 @@ class _MasterArtPageState extends State<MasterArtPage> {
     );
     if (!result.hasException) {
       for (var i = 0; i < result.data["installations"].length; i++) {
+        List<Profile> profilesList = [];
+
+        if (result.data["installations"][i]["profile"] != null) {
+          for (var j = 0;
+          j < result.data["installations"][i]["profile"].length;
+          j++) {
+            Map<String, String> socialMap = new Map();
+            for (var key
+            in result.data["installations"][i]["profile"][j]["social"].keys) {
+              socialMap[key] =
+              result.data["installations"][i]["profile"][j]["social"][key];
+            }
+            profilesList.add(Profile(
+                result.data["installations"][i]["profile"][j]["name"],
+                result.data["installations"][i]["profile"][j]["desc"],
+                social: socialMap,
+                type: result.data["installations"][i]["profile"][j]["type"] ?? "",
+                installations: [],
+                activities: []));
+          }
+        }
         setState(() {
           listInstallation.add(
             Installation(
               id: result.data["installations"][i]["id"],
               title: result.data["installations"][i]["title"],
               desc: result.data["installations"][i]["desc"],
-              zone: result.data["installations"][i]["zone"],
+              zone: result.data["installations"][i]["zone"] ?? "",
               imgURL: result.data["installations"][i]["image"] == null
-                  ? 'https://via.placeholder.com/350'
+                  ?  PlaceholderConstants.genericImage
                   : result.data["installations"][i]["image"]["url"],
-              videoURL: result.data["installations"][i]["videoUrl"] == null
-                  ? 'empty'
-                  : result.data["installations"][i]["videoUrl"],
+              videoURL: result.data["installations"][i]["videoUrl"] ?? "",
               location: {
                 'latitude': result.data["installations"][i]["location"] == null
                     ? 0.0
@@ -71,8 +90,8 @@ class _MasterArtPageState extends State<MasterArtPage> {
                     ? 0.0
                     : result.data["installations"][i]["location"]["longitude"],
               },
-              locationRoom: result.data["installations"][i]["locationroom"],
-              profiles: [],
+              locationRoom: result.data["installations"][i]["locationroom"] ?? "",
+              profiles: profilesList,
             ),
           );
         });
@@ -100,7 +119,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
       ),
     );
     return Scaffold(
-      backgroundColor: previewScreenBackground,
+      backgroundColor: ColorConstants.previewScreen,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -234,7 +253,7 @@ class _MasterArtPageState extends State<MasterArtPage> {
                                 child: ArtListCard(
                                   title: item.title,
                                   artist: item.zone,
-                                  image: item.videoURL == 'empty'
+                                  image: item.videoURL.isEmpty
                                       ? item.imgURL
                                       : getThumbnail(item.videoURL),
                                 ),

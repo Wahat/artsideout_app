@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 
 /*
 ** Helper to convert SVG and make it compatible on Flutter on the web
-**
 */
 class PlatformSvg {
   static Widget asset(String assetName,

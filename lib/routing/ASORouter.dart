@@ -1,6 +1,7 @@
+import 'package:artsideout_app/components/common/Placeholder.dart';
 import 'package:artsideout_app/pages/activity/ActivityDetailPage.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/routing/routing_constants.dart';
+import 'package:artsideout_app/constants/ASORouteConstants.dart';
 // Main pages
 import "package:artsideout_app/pages/home/HomePage.dart";
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
@@ -12,14 +13,14 @@ import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 
 class ASORouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    WidgetBuilder builder;
     final parts = settings.name.split('?');
-    final args = (settings.arguments);
+    // final args = (settings.arguments);
     switch (parts[0]) {
-      //  main routes
-      case Routes.home:
-        return MaterialPageRoute(
-            builder: (context) => HomePage(), settings: settings);
-      case Routes.arts:
+      case ASORoutes.home:
+        builder = (BuildContext context) => HomePage();
+        break;
+      case ASORoutes.arts:
         var pageRoute;
         if (parts.length == 2) {
           String artDetails = parts[1].substring(3);
@@ -27,27 +28,28 @@ class ASORouter {
         } else if (parts.length == 1) {
           pageRoute = MasterArtPage();
         }
-        return MaterialPageRoute(
-            builder: (context) => pageRoute, settings: settings);
-
-      // case Routes.activities:
-      //   return MaterialPageRoute(
-      //       builder: (context) => MasterActivityPage(), settings: settings);
-
-      case Routes.activities:
-        final String activityDetails = args;
+        builder = (BuildContext context) => pageRoute;
+        break;
+      case ASORoutes.activities:
         var pageRoute;
         if (parts.length == 2) {
+          String activityDetails = parts[1].substring(3);
           pageRoute = ActivityDetailPage(activityDetails);
         } else if (parts.length == 1) {
           pageRoute = MasterActivityPage();
         }
-        return MaterialPageRoute(
-            builder: (context) => pageRoute, settings: settings);
-
-      // unknown page
+        builder = (BuildContext context) => pageRoute;
+        break;
+      case ASORoutes.search:
+        builder = (BuildContext context) => PlaceholderWidget(Colors.amber);
+        break;
+      case ASORoutes.undefinedRoute:
       default:
-        return MaterialPageRoute(builder: (context) => UndefinedRoute());
+        builder = (BuildContext context) => UndefinedRoute();
     }
+    return MaterialPageRoute(
+      builder: builder,
+      settings: settings,
+    );
   }
 }

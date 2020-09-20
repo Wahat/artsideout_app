@@ -1,15 +1,16 @@
 import 'package:artsideout_app/models/ASOCardInfo.dart';
+import 'package:artsideout_app/serviceLocator.dart';
+import 'package:artsideout_app/services/NavigationService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:artsideout_app/components/common/PlatformSvg.dart';
 
 class ASOCard extends StatefulWidget {
   final ASOCardInfo asoCardInfo;
-  final Function onTabTapped;
   final int index;
   final bool isBigCard;
 
-  ASOCard(this.asoCardInfo, this.onTabTapped, this.index, this.isBigCard);
+  ASOCard(this.asoCardInfo, this.index, this.isBigCard);
 
   @override
   _ASOCardState createState() => _ASOCardState();
@@ -17,11 +18,11 @@ class ASOCard extends StatefulWidget {
 
 class _ASOCardState extends State<ASOCard> {
   Widget build(BuildContext context) {
+    final NavigationService _navigationService =
+        serviceLocator<NavigationService>();
     return GestureDetector(
         onTap: () {
-          setState(() {
-            widget.onTabTapped(widget.index);
-          });
+          _navigationService.navigateTo(widget.asoCardInfo.route);
         },
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
@@ -40,8 +41,7 @@ class _ASOCardState extends State<ASOCard> {
                       alignment: Alignment(-0.8, 0.8),
                       child: FittedBox(
                         fit: BoxFit.fitWidth,
-                        child: Text(
-                            widget.asoCardInfo.title,
+                        child: Text(widget.asoCardInfo.title,
                             style: Theme.of(context)
                                 .textTheme
                                 .headline4

@@ -1,18 +1,15 @@
+import 'package:artsideout_app/constants/ColorConstants.dart';
+import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/graphql/ActivityQueries.dart';
-import 'package:artsideout_app/graphql/GraphQLConfiguration.dart';
+import 'package:artsideout_app/models/Profile.dart';
+import 'package:artsideout_app/services/GraphQLConfiguration.dart';
 import 'package:flutter/material.dart';
 import 'package:artsideout_app/models/Activity.dart';
 import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
-import 'package:artsideout_app/theme.dart';
-
 // GraphQL
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ActivityDetailPage extends StatefulWidget {
-  // Old
-  // final Activity data;
-  // ActivityDetailPage(this.data);
-
   final String activityPageId;
   ActivityDetailPage(this.activityPageId);
 
@@ -39,9 +36,9 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
       ),
     );
     if (!result.hasException) {
-      String imgUrlTest = (result.data["activities"]["image"] != null)
-          ? result.data["activities"]["image"]["url"]
-          : "https://via.placeholder.com/350";
+      String imgUrl = (result.data["activity"]["image"] != null)
+          ? result.data["activity"]["image"]["url"]
+          : PlaceholderConstants.genericImage;
 
       Map<String, double> location =
           (result.data["activity"]["location"] != null)
@@ -49,12 +46,32 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                   'latitude': result.data["activity"]["location"]["latitude"],
                   'longitude': result.data["activity"]["location"]["longitude"]
                 }
-              : {'latitude': -1.0, 'longitude': 43.78263096464635};
+              : {'latitude': -1.0, 'longitude': -1.0};
 
       Map<String, String> time = {
         'startTime': result.data["activity"]["startTime"] ?? "",
         'endTime': result.data["activity"]["endTime"] ?? ""
       };
+
+      List<Profile> profilesList = [];
+
+      if (result.data["activity"]["profile"] != null) {
+        for (var j = 0; j < result.data["activity"]["profile"].length; j++) {
+          Map<String, String> socialMap = new Map();
+          for (var key
+              in result.data["activity"]["profile"][j]["social"].keys) {
+            socialMap[key] =
+                result.data["activity"]["profile"][j]["social"][key];
+          }
+          profilesList.add(Profile(
+              result.data["activity"]["profile"][j]["name"],
+              result.data["activity"]["profile"][j]["desc"],
+              social: socialMap,
+              type: result.data["activity"]["profile"][j]["type"] ?? "",
+              installations: [],
+              activities: []));
+        }
+      }
 
       setState(() {
         activityDetails = Activity(
@@ -63,30 +80,39 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
             desc: result.data["activity"]["desc"],
             zone: result.data["activity"]["zone"],
             location: location,
-            profiles: result.data["activity"]["profile"],
-            imgUrl: imgUrlTest,
+            profiles: profilesList,
+            imgUrl: imgUrl,
             time: time);
       });
+    } else {
+      print("CANNOT GET ART DETAILS");
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // TODO TEMP FIX
+    Widget cool;
+    if (activityDetails == null) {
+      cool = Container();
+    } else {
+      cool = ActivityDetailWidget(data: activityDetails);
+    }
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
         elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          activityDetails.title,
-          style: TextStyle(
-            color: asoPrimary,
-          ),
-        ),
+        backgroundColor: ColorConstants.asoScaffold,
+        // title: Text(
+        //   activityDetails.title,
+        //   style: TextStyle(
+        //     color: ColorConstants.asoPrimary,
+        //   ),
+        // ),
       ),
-      body: ActivityDetailWidget(activityDetails),
+      body: cool,
     );
   }
 }

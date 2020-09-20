@@ -27,7 +27,7 @@ class ActivityQueries {
   String getOneByID(String id) {
     return """
     {
-      activity(where: {id: ${id}}) {
+      activity(where: {id: "$id"}) {
         id
         title
         desc
@@ -41,7 +41,7 @@ class ActivityQueries {
           latitude
           longitude
         }
-        locationroom
+        locationRoom
         profile {
           name
           desc

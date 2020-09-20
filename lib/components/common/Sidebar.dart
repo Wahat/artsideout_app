@@ -1,26 +1,38 @@
+import 'package:artsideout_app/constants/ASORouteConstants.dart';
+import 'package:artsideout_app/constants/ColorConstants.dart';
+import 'package:artsideout_app/serviceLocator.dart';
+import 'package:artsideout_app/services/NavigationService.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/theme.dart';
 
-const int HOMEPAGE_INDEX = 10;
-
-// TODO abstract to loop
 class Sidebar extends StatefulWidget {
   @override
   _SidebarState createState() => _SidebarState();
-
-  Sidebar(this.onTabTapped);
-
-  final Function onTabTapped;
 }
 
 class _SidebarState extends State<Sidebar> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final List<_SidebarAction> _sideBarActions = [
+    _SidebarAction("Home", Icons.home, ASORoutes.home),
+    _SidebarAction("Search", Icons.search, ASORoutes.search),
+    _SidebarAction("Studio Installations", Icons.palette, ASORoutes.arts),
+    _SidebarAction("Performances", Icons.group, ASORoutes.activities),
+    _SidebarAction("Saved", Icons.bookmark, ASORoutes.activities),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    final NavigationService _navigationService = serviceLocator<NavigationService>();
+
     return Container(
       height: MediaQuery.of(context).size.height,
       width: 100,
       decoration: BoxDecoration(
-        color: asoPrimary,
+        color: ColorConstants.asoPrimary,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -31,69 +43,28 @@ class _SidebarState extends State<Sidebar> {
                 radius: 35.0,
                 backgroundImage: NetworkImage("/assets/common/icon.png")),
           ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              icon: Icon(Icons.home),
-              iconSize: 40.0,
-              tooltip: 'Home',
-              onPressed: () {
-                changeScreen(HOMEPAGE_INDEX);
-              },
+          for ( var action in _sideBarActions )
+            Expanded(
+              flex: 1,
+              child: IconButton(
+                icon: Icon(action.icon),
+                iconSize: 40.0,
+                // tooltip: 'Saved',
+                onPressed: () {
+                  _navigationService.navigateTo(action.route);
+                },
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              icon: Icon(Icons.search),
-              iconSize: 40.0,
-              tooltip: 'Search',
-              onPressed: () {
-                changeScreen(0);
-              },
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              icon: Icon(Icons.palette),
-              iconSize: 40.0,
-              tooltip: 'Studio Installations',
-              onPressed: () {
-                changeScreen(3);
-              },
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              icon: Icon(Icons.group),
-              iconSize: 40.0,
-              tooltip: 'Performances',
-              onPressed: () {
-                changeScreen(5);
-              },
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: IconButton(
-              icon: Icon(Icons.bookmark),
-              iconSize: 40.0,
-              tooltip: 'Saved',
-              onPressed: () {
-                changeScreen(0);
-              },
-            ),
-          ),
         ],
       ),
     );
   }
+}
 
-  changeScreen(int index) {
-    setState(() {
-      widget.onTabTapped(index);
-    });
-  }
+class _SidebarAction {
+  String name;
+  IconData icon;
+  String route;
+
+  _SidebarAction(this.name, this.icon, this.route);
 }

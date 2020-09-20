@@ -1,5 +1,6 @@
+import 'package:artsideout_app/constants/ColorConstants.dart';
+import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/models/Installation.dart';
-import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -16,20 +17,25 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
   YoutubePlayerController controller;
   Widget videoPlayer = YoutubePlayerIFrame();
 
+  @override
   void initState() {
     super.initState();
     initController();
   }
 
+  @override
   void dispose() {
+
     super.dispose();
-    controller.close();
+    controller?.drain();
+    controller?.close();
   }
 
   void initController() {
+    String url = (widget.data.videoURL.isEmpty) ? 'xd' : widget.data.videoURL;
     controller = YoutubePlayerController(
       initialVideoId:
-          YoutubePlayerController.convertUrlToId(widget.data.videoURL),
+          YoutubePlayerController.convertUrlToId(url),
       params: const YoutubePlayerParams(
         showControls: true,
         showFullscreenButton: true,
@@ -50,8 +56,8 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
         ),
         icon: icon,
         textColor: Colors.white,
-        color: asoPrimary,
-        label: Text('$numInteractions  '),
+        color: ColorConstants.asoPrimary,
+        label: Text('$numInteractions'),
       );
     }
 
@@ -59,7 +65,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
       // Passing controller to widgets below.
       controller: controller,
       child: Scaffold(
-        backgroundColor: previewScreenBackground,
+        backgroundColor: ColorConstants.previewScreen,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return MediaQuery.removePadding(
@@ -68,13 +74,13 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
               child: ListView(
                 //physics: NeverScrollableScrollPhysics(),
                 children: [
-                  widget.data.videoURL != 'empty' ? videoPlayer : Container(),
-                  widget.data.videoURL != 'empty' &&
+                  widget.data.videoURL.isNotEmpty ? videoPlayer : Container(),
+                  widget.data.videoURL.isNotEmpty &&
                           widget.data.imgURL !=
-                              'https://via.placeholder.com/350'
+                              PlaceholderConstants.genericImage
                       ? SizedBox(height: 30)
                       : Container(),
-                  widget.data.imgURL == 'https://via.placeholder.com/350'
+                  widget.data.imgURL == PlaceholderConstants.genericImage
                       ? Container()
                       : Container(
                           height: 250,
@@ -140,7 +146,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
                     leading: Text(
                       'OVERVIEW',
                       style: TextStyle(
-                        color: asoPrimary,
+                        color: ColorConstants.asoPrimary,
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
                       ),

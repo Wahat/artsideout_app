@@ -1,16 +1,12 @@
 import 'package:artsideout_app/components/activity/OptionCard.dart';
 import 'package:artsideout_app/pages/art/MasterArtPage.dart';
-import 'package:artsideout_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:artsideout_app/components/common/PlatformSvg.dart';
 import 'package:artsideout_app/pages/home/HomePage.dart';
 
 class ActivityWebMenu extends StatefulWidget {
-  ActivityWebMenu(this.activityCard);
-
   Widget activityCard;
-
+  ActivityWebMenu(this.activityCard);
   @override 
   _ActivityWebMenuState createState() =>_ActivityWebMenuState();
 }

@@ -1,26 +1,18 @@
-import 'dart:convert';
-
 import 'package:artsideout_app/components/activity/ActivityWebMenu.dart';
-import 'package:artsideout_app/components/common/PlatformSvg.dart';
-import 'package:artsideout_app/models/ASOCardInfo.dart';
+import 'package:artsideout_app/constants/ColorConstants.dart';
+import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/models/Activity.dart';
 import 'package:artsideout_app/models/Profile.dart';
-import 'package:artsideout_app/theme.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // GraphQL
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:artsideout_app/graphql/GraphQLConfiguration.dart';
+import 'package:artsideout_app/services/GraphQLConfiguration.dart';
 import 'package:artsideout_app/graphql/ActivityQueries.dart';
 // Common
-import 'package:artsideout_app/components/common/PageHeader.dart';
 import 'package:artsideout_app/components/activity/ActivityCard.dart';
-import 'package:artsideout_app/pages/home/HomePage.dart';
 // Art
 import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
-import 'package:artsideout_app/pages/activity/ActivityDetailPage.dart';
-import 'package:artsideout_app/pages/art/MasterArtPage.dart';
 
 class MasterActivityPage extends StatefulWidget {
   @override
@@ -59,7 +51,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
       for (var i = 0; i < result.data["activities"].length; i++) {
         String imgUrl = (result.data["activities"][i]["image"] != null)
             ? result.data["activities"][i]["image"]["url"]
-            : "https://via.placeholder.com/350";
+            : PlaceholderConstants.genericImage;
 
         List<Profile> profilesList = [];
 
@@ -116,7 +108,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
   Widget build(BuildContext context) {
     // if statements for render
     return Scaffold(
-      backgroundColor: previewScreenBackground,
+      backgroundColor: ColorConstants.previewScreen,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -193,7 +185,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                                     } else {
                                       Navigator.pushNamed(
                                         context,
-                                        "/arts?id=${activityID}",
+                                        "/activities?id=$activityID",
                                         arguments: (activityID),
                                       );
                                     }
@@ -247,7 +239,7 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
                                     } else {
                                       Navigator.pushNamed(
                                         context,
-                                        "/arts?id=${activityID}",
+                                        "/activities?id=$activityID",
                                         arguments: (activityID),
                                       );
                                     }
@@ -267,7 +259,8 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
         (isLargeScreen && listActivity.length != 0)
               ? Expanded(
                 flex: 25,
-                  child: ActivityDetailWidget(listActivity[selectedValue]
+            key: UniqueKey(),
+                  child: ActivityDetailWidget(data: listActivity[selectedValue]
                   )
               )
               : Container(), 
