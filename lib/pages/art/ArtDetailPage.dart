@@ -1,6 +1,7 @@
 import 'package:artsideout_app/constants/ColorConstants.dart';
 import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/models/Profile.dart';
+import 'package:artsideout_app/serviceLocator.dart';
 import 'package:artsideout_app/services/GraphQLConfiguration.dart';
 import 'package:artsideout_app/graphql/InstallationQueries.dart';
 import 'package:artsideout_app/models/Installation.dart';
@@ -22,7 +23,8 @@ class ArtDetailPage extends StatefulWidget {
 class _ArtDetailPageState extends State<ArtDetailPage> {
   Installation artDetails;
 
-  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+  GraphQLConfiguration graphQLConfiguration =
+      serviceLocator<GraphQLConfiguration>();
 
   @override
   void initState() {

@@ -3,6 +3,9 @@ import 'package:artsideout_app/constants/ColorConstants.dart';
 import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/models/Activity.dart';
 import 'package:artsideout_app/models/Profile.dart';
+import 'package:artsideout_app/serviceLocator.dart';
+import 'package:artsideout_app/services/GraphQLConfiguration.dart';
+import 'package:artsideout_app/services/GraphQLConfiguration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // GraphQL
@@ -30,7 +33,8 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
   double headerFontSize;
 
   List<Activity> listActivity = List<Activity>();
-  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+  GraphQLConfiguration graphQLConfiguration =
+      serviceLocator<GraphQLConfiguration>();
 
   @override
   void initState() {

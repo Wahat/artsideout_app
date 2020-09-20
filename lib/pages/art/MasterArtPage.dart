@@ -2,6 +2,8 @@ import 'package:artsideout_app/constants/ColorConstants.dart';
 import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/models/Installation.dart';
 import 'package:artsideout_app/models/Profile.dart';
+import 'package:artsideout_app/serviceLocator.dart';
+import 'package:artsideout_app/services/GraphQLConfiguration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -31,7 +33,8 @@ class _MasterArtPageState extends State<MasterArtPage> {
   var isMediumScreen = false;
 
   List<Installation> listInstallation = List<Installation>();
-  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+  GraphQLConfiguration graphQLConfiguration =
+      serviceLocator<GraphQLConfiguration>();
 
   @override
   void initState() {
