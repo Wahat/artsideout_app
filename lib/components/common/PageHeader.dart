@@ -1,3 +1,4 @@
+import 'package:artsideout_app/constants/ColorConstants.dart';
 import 'package:flutter/material.dart';
 
 class PageHeader extends StatefulWidget {
@@ -10,6 +11,8 @@ class PageHeader extends StatefulWidget {
 }
 
 class _PageHeaderState extends State<PageHeader> {
+  static const WEB_TITLE = "ASO2020";
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -34,11 +37,14 @@ class _PageHeaderState extends State<PageHeader> {
             children: <Widget>[
               FittedBox(
                   fit: BoxFit.fitWidth,
-                  child: Text("${widget.textTop}",
-                      style: Theme.of(context).textTheme.headline3)),
+                  child: Title(
+                    title: "$WEB_TITLE | ${widget.textTop.toUpperCase()}",
+                    color: ColorConstants.PRIMARY,
+                    child: SelectableText("${widget.textTop.toUpperCase()}",
+                      style: Theme.of(context).textTheme.headline3))),
               FittedBox(
                   fit: BoxFit.fitWidth,
-                  child: Text(widget.subtitle,
+                  child: SelectableText(widget.subtitle,
                       style: Theme.of(context).textTheme.headline5))
             ],
           ),

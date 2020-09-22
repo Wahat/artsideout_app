@@ -12,7 +12,6 @@ import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ArtDetailPage extends StatefulWidget {
-
   final String artPageId;
   ArtDetailPage(this.artPageId);
 
@@ -48,13 +47,13 @@ class _ArtDetailPageState extends State<ArtDetailPage> {
 
       if (result.data["installation"]["profile"] != null) {
         for (var j = 0;
-        j < result.data["installation"]["profile"].length;
-        j++) {
+            j < result.data["installation"]["profile"].length;
+            j++) {
           Map<String, String> socialMap = new Map();
           for (var key
-          in result.data["installation"]["profile"][j]["social"].keys) {
+              in result.data["installation"]["profile"][j]["social"].keys) {
             socialMap[key] =
-            result.data["installation"]["profile"][j]["social"][key];
+                result.data["installation"]["profile"][j]["social"][key];
           }
           profilesList.add(Profile(
               result.data["installation"]["profile"][j]["name"],
@@ -78,7 +77,7 @@ class _ArtDetailPageState extends State<ArtDetailPage> {
               ? "N/A"
               : result.data["installation"]["zone"],
           imgURL: result.data["installation"]["image"] == null
-              ? PlaceholderConstants.genericImage
+              ? PlaceholderConstants.GENERIC_IMAGE
               : result.data["installation"]["image"]["url"],
           videoURL: result.data["installation"]["videoUrl"] ?? "",
           location: {
@@ -108,20 +107,20 @@ class _ArtDetailPageState extends State<ArtDetailPage> {
       cool = ArtDetailWidget(data: artDetails);
     }
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: ColorConstants.asoPrimary,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: ColorConstants.PRIMARY,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          elevation: 0.0,
         ),
-        elevation: 0.0,
-      ),
-    body: cool);
+        body: cool);
   }
 }

@@ -4,6 +4,7 @@ import 'package:artsideout_app/models/Installation.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
+// TODO Merge with Art Detail Widget
 class ArtDetailWidget extends StatefulWidget {
   final Installation data;
 
@@ -56,8 +57,8 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
         ),
         icon: icon,
         textColor: Colors.white,
-        color: ColorConstants.asoPrimary,
-        label: Text('$numInteractions'),
+        color: ColorConstants.PRIMARY,
+        label: SelectableText('$numInteractions'),
       );
     }
 
@@ -65,7 +66,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
       // Passing controller to widgets below.
       controller: controller,
       child: Scaffold(
-        backgroundColor: ColorConstants.previewScreen,
+        backgroundColor: ColorConstants.PREVIEW_SCREEN,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return MediaQuery.removePadding(
@@ -77,10 +78,10 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
                   widget.data.videoURL.isNotEmpty ? videoPlayer : Container(),
                   widget.data.videoURL.isNotEmpty &&
                           widget.data.imgURL !=
-                              PlaceholderConstants.genericImage
+                              PlaceholderConstants.GENERIC_IMAGE
                       ? SizedBox(height: 30)
                       : Container(),
-                  widget.data.imgURL == PlaceholderConstants.genericImage
+                  widget.data.imgURL == PlaceholderConstants.GENERIC_IMAGE
                       ? Container()
                       : Container(
                           height: 250,
@@ -109,13 +110,13 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          SelectableText(
                             'John Appleseed',
                           ),
                           SizedBox(
                             height: 4,
                           ),
-                          Text(
+                          SelectableText(
                             'Artist',
                             style: TextStyle(
                                 fontSize: 14.5,
@@ -143,10 +144,10 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
                     ),
                   ),
                   ListTile(
-                    leading: Text(
+                    leading: SelectableText(
                       'OVERVIEW',
                       style: TextStyle(
-                        color: ColorConstants.asoPrimary,
+                        color: ColorConstants.PRIMARY,
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
                       ),
@@ -168,7 +169,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
                         SizedBox(
                           width: 16.0,
                         ),
-                        Flexible(child: Text(widget.data.desc)),
+                        Flexible(child: SelectableText(widget.data.desc)),
                       ],
                     ),
                   ),

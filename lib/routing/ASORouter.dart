@@ -11,16 +11,17 @@ import 'package:artsideout_app/pages/undefined_routes/UndefinedRoute.dart';
 // Detailed pages
 import 'package:artsideout_app/pages/art/ArtDetailPage.dart';
 
+// TODO add route that handles side widget
 class ASORouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     WidgetBuilder builder;
     final parts = settings.name.split('?');
     // final args = (settings.arguments);
     switch (parts[0]) {
-      case ASORoutes.home:
+      case ASORoutes.HOME:
         builder = (BuildContext context) => HomePage();
         break;
-      case ASORoutes.arts:
+      case ASORoutes.INSTALLATIONS:
         var pageRoute;
         if (parts.length == 2) {
           String artDetails = parts[1].substring(3);
@@ -30,7 +31,7 @@ class ASORouter {
         }
         builder = (BuildContext context) => pageRoute;
         break;
-      case ASORoutes.activities:
+      case ASORoutes.ACTIVITIES:
         var pageRoute;
         if (parts.length == 2) {
           String activityDetails = parts[1].substring(3);
@@ -40,10 +41,10 @@ class ASORouter {
         }
         builder = (BuildContext context) => pageRoute;
         break;
-      case ASORoutes.search:
+      case ASORoutes.SEARCH:
         builder = (BuildContext context) => PlaceholderWidget(Colors.amber);
         break;
-      case ASORoutes.undefinedRoute:
+      case ASORoutes.UNDEFINED_ROUTE:
       default:
         builder = (BuildContext context) => UndefinedRoute();
     }

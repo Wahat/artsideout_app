@@ -4,14 +4,12 @@ class ArtListCard extends StatelessWidget {
   final String title;
   final String artist;
   final String image;
-  final Widget pageButton;
 
   const ArtListCard({
     Key key,
     this.title,
     this.artist,
     this.image,
-    this.pageButton,
   }) : super(key: key);
 
   @override
@@ -40,48 +38,34 @@ class ArtListCard extends StatelessWidget {
             ),
             Expanded(
               flex: 4,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          color: Color(0xFFBE4C59),
-                          fontSize: 15.5,
-                          fontWeight: FontWeight.w600,
-                        ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                      child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: Icon(
-                            Icons.location_on,
-                            size: 16.0,
-                            color: Color(0xFFBE4C59),
-                          ),
-                        ),
-                        FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: Text(
-                            '  ' + artist,
-                            style: TextStyle(
-                              color: Color(0xFFBE4C59),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ),
-                      ],
+                  )),
+                  Center(
+                    child: Text(
+                      '  ' + artist,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Color(0xFFBE4C59),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.0,
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

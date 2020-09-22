@@ -1,9 +1,11 @@
-import 'package:artsideout_app/components/common/SpeedDialMenu.dart';
+import 'package:artsideout_app/components/common/MobileMenu.dart';
+import 'package:artsideout_app/constants/DisplayConstants.dart';
 import 'package:artsideout_app/serviceLocator.dart';
+import 'package:artsideout_app/services/DisplayService.dart';
 import 'package:artsideout_app/services/NavigationService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'components/common/PlatformSvg.dart';
+import '../common/PlatformSvg.dart';
 // Named Routes
 import 'package:artsideout_app/constants/ASORouteConstants.dart';
 import 'package:artsideout_app/components/common/Sidebar.dart';
@@ -14,38 +16,55 @@ class AppLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NavigationService _navigationService =
-        serviceLocator<NavigationService>();
+    DisplayService _displayService = serviceLocator<DisplayService>();
+    _displayService.updateDisplaySize(context);
+
+    Widget _buildDesktopLayout() {
+      SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+
+      return new Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Stack(children: <Widget>[
+            Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: PlatformSvg.asset(
+                  "assets/icons/asobg.svg",
+                  fit: BoxFit.fitHeight,
+                )),
+            Row(children: <Widget>[new Sidebar(), Expanded(child: childPage)])
+          ]));
+    }
+
     Widget _buildTabletLayout() {
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 
-      return Stack(children: <Widget>[
-        Positioned(
-            left: 100,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: PlatformSvg.asset(
-              "assets/icons/asobg.svg",
-              fit: BoxFit.fitHeight,
-            )),
-        Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Row(children: <Widget>[
-              Sidebar(),
-              Expanded(
-                  child: Scaffold(
-                      backgroundColor: Colors.transparent,
-                      extendBodyBehindAppBar: true,
-                      body: childPage))
-            ]))
-      ]);
+      return new Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Stack(children: <Widget>[
+            Positioned(
+                left: 100,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: PlatformSvg.asset(
+                  "assets/icons/asobg.svg",
+                  fit: BoxFit.fitHeight,
+                )),
+            Row(children: <Widget>[new Sidebar(), Expanded(child: childPage)])
+          ]));
     }
 
+    // TODO Fix Global Back Button
     Widget _buildMobileLayout() {
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+      final NavigationService _navigationService =
+          serviceLocator<NavigationService>();
       return Stack(children: <Widget>[
         PlatformSvg.asset(
           "assets/icons/asobg.svg",
@@ -56,7 +75,7 @@ class AppLayout extends StatelessWidget {
           body: childPage,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: SpeedDialMenu(),
+          floatingActionButton: MobileMenu(),
           bottomNavigationBar: BottomAppBar(
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -66,10 +85,11 @@ class AppLayout extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(50.0, 8.0, 8.0, 12.0),
                   child: IconButton(
                     onPressed: () {
-                      _navigationService.navigateTo(ASORoutes.home);
+                      _navigationService.navigateTo(ASORoutes.HOME);
                     },
                     icon: Icon(
                       Icons.home,
+                      semanticLabel: "Home",
                       size: 29.0,
                     ),
                   ),
@@ -78,10 +98,11 @@ class AppLayout extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(8.0, 8.0, 50.0, 12.0),
                   child: IconButton(
                     onPressed: () {
-                      _navigationService.navigateTo(ASORoutes.activities);
+                      _navigationService.navigateTo(ASORoutes.ACTIVITIES);
                     },
                     icon: Icon(
                       Icons.search,
+                      semanticLabel: "Search",
                       size: 28,
                     ),
                   ),
@@ -93,12 +114,14 @@ class AppLayout extends StatelessWidget {
       ]);
     }
 
-    bool _isLargeScreen = false;
-    if (MediaQuery.of(context).size.width > 600) {
-      _isLargeScreen = true;
-    } else {
-      _isLargeScreen = false;
+    switch (_displayService.displaySize) {
+      case DisplaySize.LARGE:
+        return _buildDesktopLayout();
+      case DisplaySize.MEDIUM:
+        return _buildTabletLayout();
+      case DisplaySize.SMALL:
+      default:
+        return _buildMobileLayout();
     }
-    return _isLargeScreen ? _buildTabletLayout() : _buildMobileLayout();
   }
 }

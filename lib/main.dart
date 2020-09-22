@@ -11,9 +11,7 @@ import 'package:artsideout_app/routing/ASORouter.dart';
 import 'package:artsideout_app/constants/ASORouteConstants.dart';
 import 'package:artsideout_app/services/NavigationService.dart';
 import 'package:artsideout_app/serviceLocator.dart';
-import 'package:artsideout_app/AppLayout.dart';
-
-GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+import 'package:artsideout_app/components/layout/AppLayout.dart';
 
 void main() {
   // Google Fonts License
@@ -31,6 +29,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey<NavigatorState> _navigatorKey =
         serviceLocator<NavigationService>().navigatorKey;
+    GraphQLConfiguration graphQLConfiguration = serviceLocator<GraphQLConfiguration>();
     return GraphQLProvider(
         client: graphQLConfiguration.client,
         child: MaterialApp(
@@ -47,7 +46,7 @@ class App extends StatelessWidget {
             },
             child: AppLayout(childPage: child),
           ),
-          initialRoute: ASORoutes.home,
+          initialRoute: ASORoutes.HOME,
           onGenerateRoute: ASORouter.generateRoute,
         ));
   }

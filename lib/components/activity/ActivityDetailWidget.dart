@@ -7,6 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+// TODO Merge with Art Detail Widget
 class ActivityDetailWidget extends StatefulWidget {
   final Activity data;
   ActivityDetailWidget({Key key, this.data}) : super(key: key);
@@ -92,24 +93,24 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
             ),
             ListTile(
               leading: CircleAvatar(
-                backgroundColor: ColorConstants.asoPrimary,
+                backgroundColor: ColorConstants.PRIMARY,
                 radius: 25.0,
               ),
               title: Column(
                 children: <Widget>[
-                  Text(
+                  SelectableText(
                     startTimeDisplay(widget.data.time["startTime"], context),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
+                  SelectableText(
                     'to',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
+                  SelectableText(
                     endTimeDisplay(widget.data.time["endTime"], context),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -118,17 +119,17 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                 ],
               ),
               trailing: IconButton(
-                icon: Icon(Icons.bookmark),
-                color: ColorConstants.asoPrimary,
+                icon: Icon(Icons.bookmark, semanticLabel: "Saved Button"),
+                color: ColorConstants.PRIMARY,
                 onPressed: () {
                   print('Save button pressed! uwu');
                 },
               ),
             ),
             ListTile(
-                leading: Text(displayZone(widget.data.zone),
+                leading: SelectableText(displayZone(widget.data.zone),
                     style: TextStyle(
-                      color: ColorConstants.asoPrimary,
+                      color: ColorConstants.PRIMARY,
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
                     ))),
@@ -140,10 +141,10 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
               endIndent: 15.0,
             ),
             ListTile(
-              leading: Text(
+              leading: SelectableText(
                 'OVERVIEW',
                 style: TextStyle(
-                  color: ColorConstants.asoPrimary,
+                  color: ColorConstants.PRIMARY,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
                 ),
@@ -157,7 +158,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                     width: 16.0,
                   ),
                   Flexible(
-                    child: Text(
+                    child: SelectableText(
                       displayDesc(widget.data.desc),
                     ),
                   )
@@ -165,9 +166,9 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
               ),
             ),
             ListTile(
-                leading: Text('ORGANIZERS',
+                leading: SelectableText('ORGANIZERS',
                     style: TextStyle(
-                      color: ColorConstants.asoPrimary,
+                      color: ColorConstants.PRIMARY,
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                     ))),
@@ -178,7 +179,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                 children: [
                   for (var profile in widget.data.profiles)
                     ListTile(
-                      leading: Text(
+                      leading: SelectableText(
                         "${profile.name}",
                         style: TextStyle(
                           color: Colors.red,

@@ -6,7 +6,7 @@ class GraphQLConfiguration {
     uri: "https://api-us-east-1.graphcms.com/v2/ckaris74x150r01zd4iye1g9k/master",
   );
 
-  ValueNotifier<GraphQLClient> client = ValueNotifier(
+  final ValueNotifier<GraphQLClient> client = ValueNotifier(
     GraphQLClient(
       link: httpLink,
       cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),

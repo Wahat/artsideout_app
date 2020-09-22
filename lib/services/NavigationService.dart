@@ -7,6 +7,12 @@ class NavigationService {
     return navigatorKey.currentState.pushNamed(routeName);
   }
 
+  Future<dynamic> navigateToWithId(String routeName, String argument) {
+    return navigatorKey.currentState.pushNamed(
+        "$routeName?id=$argument",
+        arguments: (argument));
+  }
+
   void goBack(){
     return navigatorKey.currentState.pop();
   }

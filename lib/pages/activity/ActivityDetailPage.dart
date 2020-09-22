@@ -40,7 +40,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
     if (!result.hasException) {
       String imgUrl = (result.data["activity"]["image"] != null)
           ? result.data["activity"]["image"]["url"]
-          : PlaceholderConstants.genericImage;
+          : PlaceholderConstants.GENERIC_IMAGE;
 
       Map<String, double> location =
           (result.data["activity"]["location"] != null)
@@ -106,7 +106,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
           color: Colors.black,
         ),
         elevation: 0.0,
-        backgroundColor: ColorConstants.asoScaffold,
+        backgroundColor: ColorConstants.SCAFFOLD,
         // title: Text(
         //   activityDetails.title,
         //   style: TextStyle(

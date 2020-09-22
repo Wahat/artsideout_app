@@ -27,7 +27,8 @@ class ActivityCard extends StatelessWidget {
     if (startTimeGiven == "") {
       return "ALL DAY";
     } else {
-      return TimeOfDay.fromDateTime(DateTime.parse(startTimeGiven)).format(context);
+      return TimeOfDay.fromDateTime(DateTime.parse(startTimeGiven))
+          .format(context);
     }
   }
 
@@ -35,7 +36,8 @@ class ActivityCard extends StatelessWidget {
     if (endTimeGiven == "") {
       return "";
     } else {
-      return TimeOfDay.fromDateTime(DateTime.parse(endTimeGiven)).format(context);
+      return TimeOfDay.fromDateTime(DateTime.parse(endTimeGiven))
+          .format(context);
     }
   }
 
@@ -52,98 +54,16 @@ class ActivityCard extends StatelessWidget {
     }
     return zone;
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    // Font Sizes
-    double titleFontSize;
-    double descFontSize;
-    double zoneFontSize;
-    double zoneIconSize;
-    double startFontSize;
-    double endFontSize;
-    double cardHeight;
-    double cardWidth;
-
-    if (MediaQuery.of(context).size.width > 1300) { // Web, big tablet
-      titleFontSize = 24.0;
-      descFontSize = 14.0;
-      zoneFontSize = 18.0;
-      zoneIconSize = 23.0;
-      startFontSize = 24.0;
-      endFontSize = 24.0;
-      cardHeight = MediaQuery.of(context).size.height / 6;
-      cardWidth = MediaQuery.of(context).size.width;      
-    }
-    else if (MediaQuery.of(context).size.width > 700) { // small tablet
-      titleFontSize = 24.0;
-      descFontSize = 13.0;
-      zoneFontSize = 18.0;
-      zoneIconSize = 23.0;
-      startFontSize = 22.0;
-      endFontSize = 22.0;
-      cardHeight = MediaQuery.of(context).size.height / 6;
-      cardWidth = MediaQuery.of(context).size.width;
-    } else if (MediaQuery.of(context).size.width > 400 && MediaQuery.of(context).size.height > 700) { // Pixel, iPhone 6/7/8 Plus
-      titleFontSize = 22.0;
-      descFontSize = 12.0;
-      zoneFontSize = 16.0;
-      zoneIconSize = 23.0;
-      startFontSize = 20.0;
-      endFontSize = 20.0;
-      cardHeight = MediaQuery.of(context).size.height / 6;
-      cardWidth = MediaQuery.of(context).size.width;
-    } else if (MediaQuery.of(context).size.width > 370 && MediaQuery.of(context).size.height > 810) { // iPhone X
-      titleFontSize = 22.0;
-      descFontSize = 12.0;
-      zoneFontSize = 16.0;
-      zoneIconSize = 23.0;
-      startFontSize = 20.0;
-      endFontSize = 20.0;
-      cardHeight = MediaQuery.of(context).size.height / 6.75;
-      cardWidth = MediaQuery.of(context).size.width;
-    } else if (MediaQuery.of(context).size.width > 350 && MediaQuery.of(context).size.height > 630) { // Moto G4, Galaxy S5, iPhone 6/7/8/X
-      titleFontSize = 20.0;
-      descFontSize = 10.0;
-      zoneFontSize = 13.0;
-      zoneIconSize = 18.0;
-      startFontSize = 20.0;
-      endFontSize = 20.0;
-      cardHeight = MediaQuery.of(context).size.height / 6;
-      cardWidth = MediaQuery.of(context).size.width;
-    } else if (MediaQuery.of(context).size.width > 310) { // iPhone 5/SE
-      titleFontSize = 16.0;
-      descFontSize = 9.0;
-      zoneFontSize = 10.0;
-      zoneIconSize = 12.0;
-      startFontSize = 20.0;
-      endFontSize = 20.0;
-      cardHeight = MediaQuery.of(context).size.height / 6;
-      cardWidth = MediaQuery.of(context).size.width;
-    } else { // small width folding phones
-      titleFontSize = 16.0;
-      descFontSize = 9.0;
-      zoneFontSize = 13.0;
-      zoneIconSize = 16.0;
-      startFontSize = 20.0;
-      endFontSize = 20.0;
-      cardHeight = MediaQuery.of(context).size.height / 6;
-      cardWidth = MediaQuery.of(context).size.width;
-    }
-
-    if (MediaQuery.of(context).size.height < 500 && MediaQuery.of(context).size.width > 700) { 
-      cardHeight = 150.0;
-    } else if (MediaQuery.of(context).size.height < 500) {
-      cardHeight = 100.0;
-    }
-
     return Container(
       //height: 125.0,
-      height: cardHeight,
-      width: cardWidth,
+      height: 130,
+      width: 250,
       margin: EdgeInsets.all(7),
-      decoration: BoxDecoration(  
-        color: Colors.white, 
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
@@ -154,112 +74,112 @@ class ActivityCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Stack( 
+      child: Row(
         children: <Widget>[
-          Row( 
-            children: <Widget>[ 
-              Expanded( 
-                flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      FittedBox( 
-                        fit: BoxFit.scaleDown, 
-                        child: SizedBox( 
-                          child:  Padding( 
-                            padding: EdgeInsets.only(left: 20.0, top: 9.0), 
-                            child: Text( 
-                              startTimeDisplay(time["startTime"], context),
-                              style: TextStyle( 
-                                fontWeight: FontWeight.w900,  
-                                fontSize: startFontSize,
-                                fontFamily: 'Roboto',
-                                color: ColorConstants.asoPrimary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
-                        child: Divider(
-                          color: Color(0xFFBE4C59),
-                          thickness: 1.0,
-                          indent: 45.0,
-                          endIndent: 30.0,
-                        )
-                      ),
-                      // "to" divider
-
-                      // Padding( 
-                      //   padding: EdgeInsets.all(10.0),
-                      //   child: Text(
-                      //     to(time["startTime"]),
-                      //     textAlign: TextAlign.center,
-                      //     style: TextStyle( 
-                      //       fontSize: 16.0,
-                      //       fontWeight: FontWeight.bold,
-                      //     ),
-                      //   )
-                      // ),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: SizedBox( 
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 20.0, bottom: 9.0),
-                            child: Text( 
-                              endTimeDisplay(time["endTime"], context),
-                              style: TextStyle( 
-                                fontWeight: FontWeight.w900,  
-                                fontSize: endFontSize,
-                                fontFamily: 'Roboto',
-                                color: ColorConstants.asoPrimary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ]
-                ),
-              ),
-              Expanded( 
-                flex: 7,
-                child: Column(
-                  children: <Widget>[
-                    Expanded( 
-                      flex: 30,
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        padding: EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
-                        child: Text( 
-                          title,
-                          overflow: TextOverflow.ellipsis,
+          Expanded(
+            flex: 2,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20.0, top: 9.0),
+                        child: Text(
+                          startTimeDisplay(time["startTime"], context),
                           style: TextStyle(
-                            fontSize: titleFontSize, 
-                            fontWeight: FontWeight.bold,
-                            color: ColorConstants.asoPrimary,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 16.0,
+                            fontFamily: 'Roboto',
+                            color: ColorConstants.PRIMARY,
                           ),
                         ),
                       ),
                     ),
-                    Expanded( 
-                      flex: 45,
-                      child: Container( 
-                        // TODO: ELLIPSIS BELOW NOT WORKING PROPERLY, possibly Flutter bug?
-                        padding: EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
-                        alignment: Alignment.topLeft,
-                        // testing purposes
-                        // width: 300,
-                        // height: 85,
-                        // width: MediaQuery.of(context).size.width*0.7,
-                        // height: MediaQuery.of(context).size.height*0.5,
-                        // color: Colors.green[200],
-                        //
+                  ),
+                  Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
+                      child: Divider(
+                        color: Color(0xFFBE4C59),
+                        thickness: 1.0,
+                        indent: 45.0,
+                        endIndent: 30.0,
+                      )),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20.0, bottom: 9.0),
                         child: Text(
-                          displayDesc(desc),
+                          endTimeDisplay(time["endTime"], context),
                           style: TextStyle(
-                            fontSize: descFontSize,
-                            color: Color(0xFFBE4C59),
+                            fontWeight: FontWeight.w900,
+                            fontSize: 16.0,
+                            fontFamily: 'Roboto',
+                            color: ColorConstants.PRIMARY,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ]),
+          ),
+          Expanded(
+            flex: 8,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstants.PRIMARY,
+                    ),
+                  ),
+                ),
+                Container(
+                  // TODO: ELLIPSIS BELOW NOT WORKING PROPERLY, possibly Flutter bug?
+                  padding: EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    displayDesc(desc),
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Color(0xFFBE4C59),
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    softWrap: true,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 20.0, right: 5.0, bottom: 15.0, top: 3.0),
+                        alignment: Alignment.topLeft,
+                        child: Icon(
+                          Icons.person,
+                          size: 14.0,
+                          color: Color(0xFFBE4C59),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 5.0, right: 20.0, bottom: 10.0, top: 3.0),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          displayZone(zone),
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: ColorConstants.PRIMARY,
                           ),
                           overflow: TextOverflow.clip,
                           maxLines: 3,
@@ -267,47 +187,10 @@ class ActivityCard extends StatelessWidget {
                           textAlign: TextAlign.left,
                         ),
                       ),
-                    ),
-                    Expanded( 
-                      flex: 25, 
-                      child: Row(
-                        children: <Widget>[
-                          Container( 
-                            padding: EdgeInsets.only(left: 20.0, right: 5.0, bottom: 15.0, top: 3.0),
-                            alignment: Alignment.topLeft,
-                            child: Icon(
-                              Icons.person,
-                              size: zoneIconSize,
-                              color: Color(0xFFBE4C59),
-                            ),
-                          ),
-                          Container( 
-                            padding: EdgeInsets.only(left: 5.0, right: 20.0, bottom: 10.0, top: 3.0),
-                            alignment: Alignment.topLeft,
-                            child: Text( 
-                              displayZone(zone),
-                              style: TextStyle(
-                                fontSize: zoneFontSize,
-                                color: ColorConstants.asoPrimary,
-                              ),
-                              overflow: TextOverflow.clip,
-                              maxLines: 3,
-                              softWrap: true,
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Material( 
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(30), 
-            child: detailPageButton,
+                    ],
+                  ),
+              ],
+            ),
           ),
         ],
       ),

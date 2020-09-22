@@ -7,10 +7,9 @@ import 'package:artsideout_app/components/common/PlatformSvg.dart';
 
 class ASOCard extends StatefulWidget {
   final ASOCardInfo asoCardInfo;
-  final int index;
   final bool isBigCard;
 
-  ASOCard(this.asoCardInfo, this.index, this.isBigCard);
+  ASOCard(this.asoCardInfo, this.isBigCard);
 
   @override
   _ASOCardState createState() => _ASOCardState();

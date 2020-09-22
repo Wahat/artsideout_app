@@ -1,4 +1,6 @@
 class PlaceholderConstants {
-  static const String genericImage = "assets/placeholders/generic_placeholder.png";
-  static const String genericProfileImage = "assets/placeholders/profile_placeholder.png";
+  static const String GENERIC_IMAGE =
+      "assets/placeholders/generic_placeholder.png";
+  static const String PROFILE_IMAGE =
+      "assets/placeholders/profile_placeholder.png";
 }

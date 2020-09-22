@@ -8,10 +8,10 @@ ThemeData buildTheme() {
   final ThemeData base = ThemeData.light();
 
   return base.copyWith(
-    textTheme: _buildDefaultTextTheme(base.textTheme),
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    primaryColor: ColorConstants.asoPrimary,
-  );
+      textTheme: _buildDefaultTextTheme(base.textTheme),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      primaryColor: ColorConstants.PRIMARY,
+      scaffoldBackgroundColor: Colors.transparent);
 }
 
 TextTheme _buildDefaultTextTheme(TextTheme base) {
@@ -19,11 +19,11 @@ TextTheme _buildDefaultTextTheme(TextTheme base) {
     headline3: GoogleFonts.lato(
         textStyle: base.headline3,
         fontWeight: FontWeight.w900,
-        color: ColorConstants.asoPrimary),
+        color: ColorConstants.PRIMARY),
     headline4: GoogleFonts.lato(
         textStyle: base.headline4,
         fontWeight: FontWeight.w900,
-        color: ColorConstants.asoPrimary),
+        color: ColorConstants.PRIMARY),
     headline5: GoogleFonts.lato(
       textStyle: base.headline5,
       fontWeight: FontWeight.w700,
