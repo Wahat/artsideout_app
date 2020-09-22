@@ -1,26 +1,24 @@
 import 'package:artsideout_app/components/profile/ProfileDetailWidget.dart';
+import 'package:artsideout_app/constants/ColorConstants.dart';
+import 'package:artsideout_app/models/Activity.dart';
+import 'package:artsideout_app/models/Profile.dart';
 import 'package:artsideout_app/pages/profile/ProfileDetailPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:artsideout_app/graphql/Activity.dart';
-import 'package:artsideout_app/graphql/Profile.dart';
-import 'package:artsideout_app/theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
+// TODO Merge with Art Detail Widget
 class ActivityDetailWidget extends StatefulWidget {
   final Activity data;
-  int activityOrProfile = 0;
-  Profile profileToDetail;
-
-  ActivityDetailWidget(this.data);
+  ActivityDetailWidget({Key key, this.data}) : super(key: key);
 
   @override
   _ActivityDetailWidgetState createState() => _ActivityDetailWidgetState();
 }
 
 class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
+  int activityOrProfile = 0;
+  Profile profileToDetail;
   String startTimeDisplay(String startTimeGiven, BuildContext context) {
     if (startTimeGiven == "") {
       return "ALL DAY";
@@ -55,7 +53,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.activityOrProfile == 1) {
+    if (activityOrProfile == 1) {
       return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -65,21 +63,10 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
                       setState(() {
-                        widget.activityOrProfile = 0;
+                        activityOrProfile = 0;
                       });
-                    })
-                /*child: RichText(
-                    text: TextSpan(
-                        text: 'BACK',
-                        style: TextStyle(fontSize: 15, color: Colors.red[200]),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            setState(() {
-                              widget.activityOrProfile = 0;
-                            });
-                          }))*/
-                ),
-            ProfileDetailWidget(widget.profileToDetail)
+                    })),
+            ProfileDetailWidget(profileToDetail)
           ]);
     } else
       return Container(
@@ -106,24 +93,24 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
             ),
             ListTile(
               leading: CircleAvatar(
-                backgroundColor: asoPrimary,
+                backgroundColor: ColorConstants.PRIMARY,
                 radius: 25.0,
               ),
               title: Column(
                 children: <Widget>[
-                  Text(
+                  SelectableText(
                     startTimeDisplay(widget.data.time["startTime"], context),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
+                  SelectableText(
                     'to',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
+                  SelectableText(
                     endTimeDisplay(widget.data.time["endTime"], context),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -132,17 +119,17 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                 ],
               ),
               trailing: IconButton(
-                icon: Icon(Icons.bookmark),
-                color: asoPrimary,
+                icon: Icon(Icons.bookmark, semanticLabel: "Saved Button"),
+                color: ColorConstants.PRIMARY,
                 onPressed: () {
                   print('Save button pressed! uwu');
                 },
               ),
             ),
             ListTile(
-                leading: Text(displayZone(widget.data.zone),
+                leading: SelectableText(displayZone(widget.data.zone),
                     style: TextStyle(
-                      color: asoPrimary,
+                      color: ColorConstants.PRIMARY,
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
                     ))),
@@ -154,10 +141,10 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
               endIndent: 15.0,
             ),
             ListTile(
-              leading: Text(
+              leading: SelectableText(
                 'OVERVIEW',
                 style: TextStyle(
-                  color: asoPrimary,
+                  color: ColorConstants.PRIMARY,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
                 ),
@@ -171,7 +158,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                     width: 16.0,
                   ),
                   Flexible(
-                    child: Text(
+                    child: SelectableText(
                       displayDesc(widget.data.desc),
                     ),
                   )
@@ -179,9 +166,9 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
               ),
             ),
             ListTile(
-                leading: Text('ORGANIZERS',
+                leading: SelectableText('ORGANIZERS',
                     style: TextStyle(
-                      color: asoPrimary,
+                      color: ColorConstants.PRIMARY,
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                     ))),
@@ -192,7 +179,7 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                 children: [
                   for (var profile in widget.data.profiles)
                     ListTile(
-                      leading: Text(
+                      leading: SelectableText(
                         "${profile.name}",
                         style: TextStyle(
                           color: Colors.red,
@@ -222,8 +209,8 @@ class _ActivityDetailWidgetState extends State<ActivityDetailWidget> {
                                   );
                                 } else {
                                   setState(() {
-                                    widget.activityOrProfile = 1;
-                                    widget.profileToDetail = profile;
+                                    activityOrProfile = 1;
+                                    profileToDetail = profile;
                                   });
                                 }
                               })
