@@ -47,7 +47,7 @@ class AppLayout extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: Stack(children: <Widget>[
             Positioned(
-                left: 100,
+                left: 0,
                 right: 0,
                 top: 0,
                 bottom: 0,
@@ -66,6 +66,15 @@ class AppLayout extends StatelessWidget {
       final NavigationService _navigationService =
           serviceLocator<NavigationService>();
       return Stack(children: <Widget>[
+        Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: PlatformSvg.asset(
+              "assets/icons/mobile_background.svg",
+              fit: BoxFit.cover,
+            )),
         PlatformSvg.asset(
           "assets/icons/asobg.svg",
           fit: BoxFit.fitHeight,
