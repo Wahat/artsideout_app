@@ -70,12 +70,11 @@ class MasterPageLayout extends StatelessWidget {
                       bottom: MediaQuery.of(context).size.height / 3,
                       child: pageHeader),
                   Positioned(
-                    top: MediaQuery.of(context).size.height / 10,
-                    right: 0,
-                    left: 0,
-                    bottom: 0,
-                    child: mainPageWidget
-                    ),
+                      top: MediaQuery.of(context).size.height / 10,
+                      right: 0,
+                      left: 0,
+                      bottom: 0,
+                      child: mainPageWidget),
                 ],
               ),
             ),

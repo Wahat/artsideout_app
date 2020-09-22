@@ -5,7 +5,6 @@ import 'package:artsideout_app/services/NavigationService.dart';
 import 'package:flutter/material.dart';
 
 class Sidebar extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final NavigationService _navigationService =
@@ -21,32 +20,32 @@ class Sidebar extends StatelessWidget {
     ];
 
     return Container(
-          height: MediaQuery.of(context).size.height,
-          width: 100,
-          color: ColorConstants.PRIMARY.withOpacity(0.85),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: CircleAvatar(
-                    radius: 35.0,
-                    backgroundImage: NetworkImage("assets/common/icon.png")),
-              ),
-              for (var action in _sideBarActions)
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    icon: Icon(action.icon, semanticLabel: action.name),
-                    iconSize: 40.0,
-                    onPressed: () {
-                      _navigationService.navigateTo(action.route);
-                    },
-                  ),
-                )
-            ],
+      height: MediaQuery.of(context).size.height,
+      width: 100,
+      color: ColorConstants.PRIMARY.withOpacity(0.85),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 1,
+            child: CircleAvatar(
+                radius: 35.0,
+                backgroundImage: NetworkImage("assets/common/icon.png")),
           ),
-        );
+          for (var action in _sideBarActions)
+            Expanded(
+              flex: 1,
+              child: IconButton(
+                icon: Icon(action.icon, semanticLabel: action.name),
+                iconSize: 40.0,
+                onPressed: () {
+                  _navigationService.navigateTo(action.route);
+                },
+              ),
+            )
+        ],
+      ),
+    );
   }
 }
 

@@ -160,35 +160,35 @@ class ActivityCard extends StatelessWidget {
                   ),
                 ),
                 Row(
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 20.0, right: 5.0, bottom: 15.0, top: 3.0),
-                        alignment: Alignment.topLeft,
-                        child: Icon(
-                          Icons.person,
-                          size: 14.0,
-                          color: Color(0xFFBE4C59),
-                        ),
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                          left: 20.0, right: 5.0, bottom: 15.0, top: 3.0),
+                      alignment: Alignment.topLeft,
+                      child: Icon(
+                        Icons.person,
+                        size: 14.0,
+                        color: Color(0xFFBE4C59),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 5.0, right: 20.0, bottom: 10.0, top: 3.0),
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          displayZone(zone),
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: ColorConstants.PRIMARY,
-                          ),
-                          overflow: TextOverflow.clip,
-                          maxLines: 3,
-                          softWrap: true,
-                          textAlign: TextAlign.left,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                          left: 5.0, right: 20.0, bottom: 10.0, top: 3.0),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        displayZone(zone),
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: ColorConstants.PRIMARY,
                         ),
+                        overflow: TextOverflow.clip,
+                        maxLines: 3,
+                        softWrap: true,
+                        textAlign: TextAlign.left,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

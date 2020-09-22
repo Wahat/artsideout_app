@@ -26,7 +26,6 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
 
   @override
   void dispose() {
-
     super.dispose();
     controller?.drain();
     controller?.close();
@@ -35,8 +34,7 @@ class _ArtDetailWidgetState extends State<ArtDetailWidget> {
   void initController() {
     String url = (widget.data.videoURL.isEmpty) ? 'xd' : widget.data.videoURL;
     controller = YoutubePlayerController(
-      initialVideoId:
-          YoutubePlayerController.convertUrlToId(url),
+      initialVideoId: YoutubePlayerController.convertUrlToId(url),
       params: const YoutubePlayerParams(
         showControls: true,
         showFullscreenButton: true,

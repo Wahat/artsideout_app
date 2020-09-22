@@ -29,7 +29,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey<NavigatorState> _navigatorKey =
         serviceLocator<NavigationService>().navigatorKey;
-    GraphQLConfiguration graphQLConfiguration = serviceLocator<GraphQLConfiguration>();
+    GraphQLConfiguration graphQLConfiguration =
+        serviceLocator<GraphQLConfiguration>();
     return GraphQLProvider(
         client: graphQLConfiguration.client,
         child: MaterialApp(

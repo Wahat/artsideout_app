@@ -38,10 +38,10 @@ class _PageHeaderState extends State<PageHeader> {
               FittedBox(
                   fit: BoxFit.fitWidth,
                   child: Title(
-                    title: "$WEB_TITLE | ${widget.textTop.toUpperCase()}",
-                    color: ColorConstants.PRIMARY,
-                    child: SelectableText("${widget.textTop.toUpperCase()}",
-                      style: Theme.of(context).textTheme.headline3))),
+                      title: "$WEB_TITLE | ${widget.textTop.toUpperCase()}",
+                      color: ColorConstants.PRIMARY,
+                      child: SelectableText("${widget.textTop.toUpperCase()}",
+                          style: Theme.of(context).textTheme.headline3))),
               FittedBox(
                   fit: BoxFit.fitWidth,
                   child: SelectableText(widget.subtitle,
