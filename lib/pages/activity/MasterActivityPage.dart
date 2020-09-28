@@ -1,4 +1,5 @@
 import 'package:artsideout_app/components/layout/MasterPageLayout.dart';
+import 'package:artsideout_app/components/search/FetchResultCard.dart';
 import 'package:artsideout_app/constants/ASORouteConstants.dart';
 import 'package:artsideout_app/constants/DisplayConstants.dart';
 import 'package:artsideout_app/constants/PlaceholderConstants.dart';
@@ -114,26 +115,23 @@ class _MasterActivityPageState extends State<MasterActivityPage> {
       // Convert each item into a widget based on the type of item it is.
       itemBuilder: (context, index) {
         final item = listActivity[index];
+        FetchResultCard fetchResultCard = new FetchResultCard();
         return AnimatedContainer(
           duration: Duration(milliseconds: 50),
           curve: Curves.fastOutSlowIn,
           child: Material(
             color: Colors.transparent,
             child: GestureDetector(
-                child: ActivityCard(
-                    title: item.title,
-                    desc: item.desc,
-                    image: item.imgUrl,
-                    time: item.time,
-                    zone: item.zone),
+                child: fetchResultCard.getCard("Activity", item),
                 onTap: () {
                   if (_displaySize == DisplaySize.LARGE ||
                       _displaySize == DisplaySize.MEDIUM) {
                     selectedValue = index;
                     setState(() {});
                   } else {
+                    print(item.id);
                     _navigationService.navigateToWithId(
-                        ASORoutes.ACTIVITIES, item.id);
+                        fetchResultCard.getRouteConstant("Activity"), item.id);
                   }
                 }),
           ),
