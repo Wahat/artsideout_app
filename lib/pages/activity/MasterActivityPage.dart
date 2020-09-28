@@ -1,6 +1,5 @@
 import 'package:artsideout_app/components/layout/MasterPageLayout.dart';
 import 'package:artsideout_app/components/search/FetchResultCard.dart';
-import 'package:artsideout_app/constants/ASORouteConstants.dart';
 import 'package:artsideout_app/constants/DisplayConstants.dart';
 import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/models/Activity.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:artsideout_app/graphql/ActivityQueries.dart';
 // Common
-import 'package:artsideout_app/components/activity/ActivityCard.dart';
 // Art
 import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
 

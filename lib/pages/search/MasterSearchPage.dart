@@ -1,15 +1,10 @@
-import 'package:artsideout_app/components/activity/ActivityCard.dart';
-import 'package:artsideout_app/components/activity/ActivityDetailWidget.dart';
 import 'package:artsideout_app/components/common/NoResultBanner.dart';
 import 'package:artsideout_app/components/layout/MasterPageLayout.dart';
-import 'package:artsideout_app/components/profile/ProfileCard.dart';
-import 'package:artsideout_app/components/profile/ProfileDetailWidget.dart';
+
 import 'package:artsideout_app/components/search/FetchQueries.dart';
 import 'package:artsideout_app/components/search/FetchResultCard.dart';
 import 'package:artsideout_app/components/search/SearchBarFilter.dart';
-import 'package:artsideout_app/constants/ASORouteConstants.dart';
 import 'package:artsideout_app/constants/DisplayConstants.dart';
-import 'package:artsideout_app/constants/PlaceholderConstants.dart';
 import 'package:artsideout_app/serviceLocator.dart';
 import 'package:artsideout_app/services/DisplayService.dart';
 import 'package:artsideout_app/services/GraphQLConfiguration.dart';
@@ -17,10 +12,7 @@ import 'package:artsideout_app/services/NavigationService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:artsideout_app/components/art/ArtListCard.dart';
-import 'package:artsideout_app/components/art/ArtDetailWidget.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class MasterSearchPage extends StatefulWidget {
   @override
